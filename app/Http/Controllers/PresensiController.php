@@ -57,7 +57,7 @@ class PresensiController extends Controller
             ['tgl','=',$tanggal],
         ])->first();
         if ($presensi){
-            dd("sudah ada");
+            dd("Anda sudah presensi masuk");
         }else{
             Presensi::create([
                 'user_id' => auth()->user()->id,
@@ -88,6 +88,13 @@ class PresensiController extends Controller
         return view('Presensi.Rekap-karyawan',compact('presensi'));
     }
 
+    public function tampildataperkaryawan()
+    {
+        $user_id = Auth::user()->id;
+        $presensi = Presensi::with('user')->where('user_id',$user_id)->get();
+        return view('Presensi.Rekap-per-karyawan',compact('presensi'));
+    }
+
 
     public function presensipulang(){
         $timezone = 'Asia/Jakarta';
@@ -109,7 +116,7 @@ class PresensiController extends Controller
             $presensi->update($dt);
             return redirect('laman-presensi');
         }else{
-            dd("sudah ada");
+            dd("Anda sudah presensi pulang");
         }
     }
 

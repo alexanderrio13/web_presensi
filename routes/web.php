@@ -33,3 +33,4 @@ Route::group(['middleware' => ['auth','ceklevel:karyawan']], function () {
 });
 Route::get('filter-data',[PresensiController::class,'halamanrekap'])->name('filter-data');
 Route::get('filter-data/{tglawal}/{tglakhir}',[PresensiController::class,'tampildatakeseluruhan'])->name('filter-data-keseluruhan');
+Route::get('filter-data-karyawan',[PresensiController::class,'tampildataperkaryawan'])->name('filter-data-karyawan');
