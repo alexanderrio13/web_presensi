@@ -64,11 +64,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="form-group">
                                 <table border="1">
                                     <tr>
-                                        <th>pegawai</th>
+                                        <th>Karyawan</th>
                                         <th>Tanggal</th>
                                         <th>Masuk</th>
                                         <th>Keluar</th>
                                         <th>Jumlah Jam Kerja</th>
+                                        <th>Status Presensi</th>
+                                        <th>Status Lembur</th>
                                     </tr>
                                     @foreach ($presensi as $item)
                                     <tr>
@@ -77,6 +79,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <td>{{ $item->jammasuk }}</td>
                                         <td>{{ $item->jamkeluar }}</td>
                                         <td>{{ $item->jamkerja }}</td>
+                                        <td>
+                                          @if ($item->jammasuk > '08:30:59')
+                                          <span class="badge badge-danger">Terlambat</span>
+                                          @else
+                                          <span class="badge badge-success">On Time</span>
+                                          @endif
+                                        </td>
+                                        <td>
+                                          @if ($item->jamkerja > '08:59:59')
+                                          <span class="badge badge-success">Dapat Lembur</span>
+                                          @else
+                                          <span class="badge badge-warning">Tidak Lembur</span>
+                                          @endif
+                                        </td>
+
                                     </tr>
                                     @endforeach
                                 </table>
