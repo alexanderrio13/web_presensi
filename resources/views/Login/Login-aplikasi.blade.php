@@ -46,6 +46,11 @@
                             </div>
                         </div>
                     </div>
+                    @if ($error = $errors->first('password'))
+                      <div class="alert alert-danger">
+                        {{ $error }}
+                      </div>
+                    @endif
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
