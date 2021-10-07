@@ -6,6 +6,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
     <title>Go-Blog | Laporan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     @include('Template.head')
 
 </head>
@@ -27,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Rekap Presensi Karyawan</h1>
+                            <h1 class="m-0 text-dark">Rekap Presensi Anda</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -45,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content">
                 <div class="row justify-content-center">
                     <div class="card card-info card-outline">
-                        <div class="card-header">Lihat Data</div>
+                        <div class="card-header">Data Presensi</div>
                         <div class="card-body">
                             <!-- <div class="form-group">
                                 <label for="label">Tanggal Awal</label>
@@ -62,18 +64,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </div> -->
                             <div class="form-group">
-                                <table border="1">
-                                    <tr>
+                                <table class="w3-table-all" border="1">
+                                    <tr class="w3-hover-cyan">
 
                                         <th>Tanggal</th>
                                         <th>Masuk</th>
-                                        <th>Keluar</th>
+                                        <th>Pulang</th>
                                         <th>Jumlah Jam Kerja</th>
                                         <th>Status Presensi</th>
                                         <th>Status Lembur</th>
                                     </tr>
                                     @foreach ($presensi as $item)
-                                    <tr>
+                                    <tr class="w3-hover-cyan">
 
                                         <td>{{ $item->tgl }}</td>
                                         <td>{{ $item->jammasuk }}</td>
@@ -110,13 +112,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
+        <!-- <aside class="control-sidebar control-sidebar-dark"> -->
             <!-- Control sidebar content goes here -->
-            <div class="p-3">
+            <!-- <div class="p-3">
                 <h5>Title</h5>
                 <p>Sidebar content</p>
-            </div>
-        </aside>
+            </div> -->
+        <!-- </aside> -->
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->

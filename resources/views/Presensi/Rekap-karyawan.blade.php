@@ -6,6 +6,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
     <title>Go-Blog | Laporan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     @include('Template.head')
 
 </head>
@@ -62,18 +64,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </div>
                             <div class="form-group">
-                                <table border="1">
-                                    <tr>
+                                <table class="w3-table-all" border="1">
+                                    <tr class="w3-hover-cyan">
                                         <th>Karyawan</th>
                                         <th>Tanggal</th>
                                         <th>Masuk</th>
-                                        <th>Keluar</th>
+                                        <th>Pulang</th>
                                         <th>Jumlah Jam Kerja</th>
                                         <th>Status Presensi</th>
                                         <th>Status Lembur</th>
                                     </tr>
                                     @foreach ($presensi as $item)
-                                    <tr>
+                                    <tr class="w3-hover-cyan">
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->tgl }}</td>
                                         <td>{{ $item->jammasuk }}</td>

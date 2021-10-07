@@ -84,6 +84,7 @@ class PresensiController extends Controller
 
     public function tampildatakeseluruhan($tglawal, $tglakhir)
     {
+        // $user_id = Auth::user()->id;
         $presensi = Presensi::with('user')->whereBetween('tgl',[$tglawal, $tglakhir])->orderBy('tgl','asc')->get();
         return view('Presensi.Rekap-karyawan',compact('presensi'));
     }

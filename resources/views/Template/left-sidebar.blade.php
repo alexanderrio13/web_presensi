@@ -12,7 +12,7 @@
                   <img src="/Rioadi/img/logo.png" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <a href="{{route('dashboard-karyawan')}}" class="d-block"><strong>Go-BLOG Dev</strong></a>
+                  <a href="{{route('dashboard-karyawan')}}" class="d-block"><h5><strong>Go-BLOG Dev</strong></h5></a>
               </div>
 
               @else

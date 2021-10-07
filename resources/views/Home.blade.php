@@ -5,7 +5,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
-    <title>Go-Blog | Dashboard</title>
+    <title>Go-Blog | Karyawan Dashboard</title>
     @include('Template.head')
 </head>
 <body class="hold-transition sidebar-mini">
