@@ -1,9 +1,35 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <!-- <a href="#" class="brand-link"> -->
         <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-        <strong>Data Karyawan</strong>
-    </a>
+        <!-- <p class="nav-links"><strong>Go-BLOG Dev</strong></p> -->
+      <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
+
+              @if (auth()->user()->level == "karyawan")
+              <div class="image">
+                  <img src="/Rioadi/img/logo.png" class="img-circle elevation-2" alt="User Image">
+              </div>
+              <div class="info">
+                  <a href="{{route('dashboard-karyawan')}}" class="d-block"><strong>Go-BLOG Dev</strong></a>
+              </div>
+
+              @else
+              <div class="image">
+                  <img src="/Rioadi/img/logo.png" class="img-circle elevation-2" alt="User Image">
+              </div>
+              <div class="info">
+                  <a href="{{route('dashboard-admin')}}" class="d-block"><h5><strong>Go-BLOG Dev</strong></h5></a>
+              </div>
+              @endif
+
+
+
+        </div>
+      </div>
+
+    <!-- </a> -->
 
     <!-- Sidebar -->
     <div class="sidebar">
