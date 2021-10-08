@@ -71,6 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             {{$sudahpresensi->count()}}
 
+
                           </div>
 
                           <h3>Sudah Presensi</h3>
@@ -82,7 +83,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <div class="icon"><i class="fa fa-warning"></i>
                           </div>
                           <div class="count">
-                            {{$belumpresensi->count()}}
+                            {{$totkaryawan->count() - $sudahpresensi->count() }}
                           </div>
 
                           <h3>Belum Presensi</h3>

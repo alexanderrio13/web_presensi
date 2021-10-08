@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use DateTime;
 use DateTimeZone;
 use App\Models\Presensi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Auth;
+use Log;
 
 class PresensiController extends Controller
 {
@@ -17,6 +19,12 @@ class PresensiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+       $this->middleware('auth');
+     }
+
     public function index()
     {
         $user_id = Auth::user()->id;
@@ -78,14 +86,16 @@ class PresensiController extends Controller
      */
     public function halamanrekap()
     {
-        return view('Presensi.Halaman-rekap-karyawan');
+        $users = User::where('level','=','karyawan')->get();
+        return view('Presensi.Halaman-rekap-karyawan',compact('users'));
+
     }
 
 
-    public function tampildatakeseluruhan($tglawal, $tglakhir)
+    public function tampildatakeseluruhan(Request $req)
     {
         // $user_id = Auth::user()->id;
-        $presensi = Presensi::with('user')->whereBetween('tgl',[$tglawal, $tglakhir])->orderBy('tgl','asc')->get();
+        $presensi = Presensi::with('user')->whereBetween('tgl',[$req->get('tglawal'), $req->get('tglakhir')])->where('user_id',$req->get('user_id'))->orderBy('tgl','asc','user_id')->get();
         return view('Presensi.Rekap-karyawan',compact('presensi'));
     }
 

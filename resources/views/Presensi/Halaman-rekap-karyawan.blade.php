@@ -47,6 +47,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="card card-info card-outline">
                         <div class="card-header">Lihat Data</div>
                         <div class="card-body">
+                          <form action="{{route('filter-data-keseluruhan')}}" method="post">
+                            {{ csrf_field() }}
+                          <div class="form-group">
+                            <select required="required" class="form-control" name="user_id">
+                                <option></option>
+                                @foreach ($users as $user )
+
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+
+                                @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="label">Tanggal Awal</label>
                                 <input type="date" name="tglawal" id="tglawal" class="form-control" />
@@ -56,11 +68,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <a href="" onclick="this.href='/filter-data/'+ document.getElementById('tglawal').value +
-                            '/' + document.getElementById('tglakhir').value " class="btn btn-primary col-md-12">
+                              <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                                <!-- <a href="" onclick="this.href='/filter-data/'+ document.getElementById('tglawal').value +
+                            '/' + document.getElementById('tglakhir').value +
+                        '/' + document.getElementById('id').value " class="btn btn-primary col-md-12">
                                     Lihat <i class="fas fa-print"></i>
-                                </a>
+                                </a> -->
                             </div>
+                          </form>
                         </div><!-- /.container-fluid -->
 
                     </div>
