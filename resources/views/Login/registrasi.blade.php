@@ -17,16 +17,43 @@
     <link rel="stylesheet" href="{{ asset('AdminLte/dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body class="hold-transition register-page">
-    <div class="register-box">
-        <div class="register-logo">
-            <a href="{{ url('/') }}"><b>Go-BLOG</b> Dev</a>
-        </div>
+    <style>
+        body {
+          background-image: url('/Rioadi/img/manbg.jpg');
+          background-attachment: fixed;
+          background-size: cover;
+        }
+        .centered {
+          border-radius: 25px;
+          position: relative;
+          top: 50%;
+          left: 20%;
 
-        <div class="card">
+          /* bring your own prefixes */
+          transform: translate(-170%, 30%);
+        }
+        .child_centered {
+          border-radius: 25px;
+          position: relative;
+          top: 50%;
+          left: 20%;
+
+          /* bring your own prefixes */
+          transform: translate(-170%, 30%);
+        }
+    </style>
+</head>
+<body>
+<div class="centered" style="width:400px;height:550px;background-color:#EEFCFC;top:50%;left:50%;">
+  <div class="login-box" style="margin:0 auto;">
+      <div class="login-logo">
+          <!-- <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a> -->
+            <img src="/Rioadi/img/logo login page.png" style="height:100%;width:60%">
+      </div>
+
+        <div class="card" style="border-radius: 25px">
             <div class="card-body register-card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <p class="login-box-msg">Register a new account</p>
 
                 <form action="{{ route('simpanregistrasi') }}" method="post">
                     {{ csrf_field() }}
@@ -67,14 +94,14 @@
                 </form>
 
 
-                <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+                <a href="{{ route('login') }}" class="text-center">I already have an account</a>
 
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
     </div>
     <!-- /.register-box -->
-
+</div>
     <!-- jQuery -->
     @include('Template.script')
 </body>

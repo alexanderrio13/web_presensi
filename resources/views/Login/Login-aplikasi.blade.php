@@ -17,14 +17,41 @@
     <link rel="stylesheet" href="{{ asset('AdminLte/dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        body {
+          background-image: url('/Rioadi/img/manbg.jpg');
+          background-attachment: fixed;
+          background-size: cover;
+        }
+        .centered {
+          border-radius: 25px;
+          position: relative;
+          top: 50%;
+          left: 20%;
+
+          /* bring your own prefixes */
+          transform: translate(-170%, 30%);
+        }
+        .child_centered {
+          border-radius: 25px;
+          position: relative;
+          top: 50%;
+          left: 20%;
+
+          /* bring your own prefixes */
+          transform: translate(-170%, 30%);
+        }
+    </style>
 </head>
-<body class="hold-transition login-page">
-    <div class="login-box">
+<body>
+ <div class="centered" style="width:400px;height:550px;background-color:#EEFCFC;top:50%;left:50%;">
+    <div class="login-box" style="margin:0 auto;">
         <div class="login-logo">
-            <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a>
+            <!-- <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a> -->
+              <img src="/Rioadi/img/logo login page.png" style="height:100%;width:60%">
         </div>
         <!-- /.login-logo -->
-        <div class="card">
+        <div class="card" style="border-radius: 25px" >
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
@@ -73,7 +100,7 @@
         </div>
     </div>
     <!-- /.login-box -->
-
+  </div>
     <!-- jQuery -->
     @include('Template.script')
 
