@@ -59,6 +59,17 @@ class PresensiController extends Controller
         $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
+        $img =  $request->get('image_in');
+        $folderPath = "Rioadi/uploads_in/";
+        $image_parts = explode(";base64,", $img);
+
+        foreach ($image_parts as $key => $image_in){
+        $image_base64 = base64_decode($image_in);
+        }
+
+        $fileName = uniqid() . '.png';
+        $file = $folderPath . $fileName;
+        file_put_contents($file, $image_base64);
 
         $presensi = Presensi::where([
             ['user_id','=',auth()->user()->id],
@@ -71,11 +82,12 @@ class PresensiController extends Controller
                 'user_id' => auth()->user()->id,
                 'tgl' => $tanggal,
                 'jammasuk' => $localtime,
+                'image_in' => $fileName,
             ]);
         }
 
 
-        return redirect('laman-presensi');
+        return redirect()->back()->with('success', 'Data submitted Successfully');
     }
 
     /**
@@ -96,7 +108,8 @@ class PresensiController extends Controller
     {
         // $user_id = Auth::user()->id;
         $presensi = Presensi::with('user')->whereBetween('tgl',[$req->get('tglawal'), $req->get('tglakhir')])->where('user_id',$req->get('user_id'))->orderBy('tgl','asc','user_id')->get();
-        return view('Presensi.Rekap-karyawan',compact('presensi'));
+        $userId = $req->input('user_id');
+        return view('Presensi.Rekap-karyawan',compact('presensi','userId'));
     }
 
     public function tampildataperkaryawan()
@@ -107,11 +120,22 @@ class PresensiController extends Controller
     }
 
 
-    public function presensipulang(){
+    public function presensipulang(Request $request){
         $timezone = 'Asia/Jakarta';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
+        $img =  $request->get('image_out');
+        $folderPath = "Rioadi/uploads_out/";
+        $image_parts = explode(";base64,", $img);
+
+        foreach ($image_parts as $key => $image_out){
+        $image_base64 = base64_decode($image_out);
+        }
+
+        $fileName = uniqid() . '.png';
+        $file = $folderPath . $fileName;
+        file_put_contents($file, $image_base64);
 
         $presensi = Presensi::where([
             ['user_id','=',auth()->user()->id],
@@ -120,12 +144,13 @@ class PresensiController extends Controller
 
         $dt=[
             'jamkeluar' => $localtime,
+            'image_out' => $fileName,
             'jamkerja' => date('H:i:s', strtotime($localtime) - strtotime($presensi->jammasuk))
         ];
 
         if ($presensi->jamkeluar == ""){
             $presensi->update($dt);
-            return redirect('laman-presensi');
+            return redirect()->back()->with('success', 'Data submitted Successfully');
         }else{
             dd("Anda sudah presensi pulang");
         }
