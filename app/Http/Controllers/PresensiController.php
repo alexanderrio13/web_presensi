@@ -32,9 +32,18 @@ class PresensiController extends Controller
         return view('Presensi.Presensi',compact('presensi'));
     }
 
+    public function masuk()
+    {
+        $user_id = Auth::user()->id;
+        $presensi = Presensi::with('user')->where('user_id',$user_id)->whereDate('created_at', Carbon::today())->get();
+        return view('Presensi.Masuk',compact('presensi'));
+    }
+
     public function keluar()
     {
-        return view('Presensi.Keluar');
+        $user_id = Auth::user()->id;
+        $presensi = Presensi::with('user')->where('user_id',$user_id)->whereDate('created_at', Carbon::today())->get();
+        return view('Presensi.Keluar',compact('presensi'));
     }
 
     /**
@@ -87,7 +96,7 @@ class PresensiController extends Controller
         }
 
 
-        return redirect()->back()->with('success', 'Data submitted Successfully');
+        return redirect('/laman-presensi')->with('success', 'Data submitted Successfully');
     }
 
     /**
@@ -150,7 +159,7 @@ class PresensiController extends Controller
 
         if ($presensi->jamkeluar == ""){
             $presensi->update($dt);
-            return redirect()->back()->with('success', 'Data submitted Successfully');
+            return redirect('/laman-presensi')->with('success', 'Data submitted Successfully');
         }else{
             dd("Anda sudah presensi pulang");
         }

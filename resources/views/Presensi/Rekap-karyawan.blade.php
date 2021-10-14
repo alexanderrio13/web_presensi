@@ -49,6 +49,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="card card-info card-outline">
                         <div class="card-header">Lihat Data</div>
                         <div class="card-body">
+                          <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                          <form action="{{route('filter-data-keseluruhan')}}" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                              <input type="hidden" name="user_id" value="{{$userId}}">
+                            </div>
                             <div class="form-group">
                                 <label for="label">Tanggal Awal</label>
                                 <input type="date" name="tglawal" id="tglawal" class="form-control" />
@@ -58,11 +64,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <a href="" onclick="this.href='/filter-data/'+ document.getElementById('tglawal').value +
+                                <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                                <!-- <a href="" onclick="this.href='/filter-data/'+ document.getElementById('tglawal').value +
                             '/' + document.getElementById('tglakhir').value" class="btn btn-primary col-md-12">
                                     Lihat <i class="fas fa-print"></i>
-                                </a>
+                                </a> -->
                             </div>
+                          </form>
                             <div class="form-group">
                                 <table class="w3-table-all" border="1">
                                     <tr class="w3-hover-cyan">

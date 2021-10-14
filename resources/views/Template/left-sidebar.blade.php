@@ -8,19 +8,19 @@
 
 
               @if (auth()->user()->level == "karyawan")
-              <div class="image">
+              <!-- <div class="image">
                   <img src="/Rioadi/img/logo.png" class="img-circle elevation-2" alt="User Image">
-              </div>
+              </div> -->
               <div class="info">
-                  <a href="{{route('dashboard-karyawan')}}" class="d-block"><h5><strong>Go-BLOG Dev</strong></h5></a>
+                  <a href="{{route('dashboard-karyawan')}}" class="d-block"><img src="/Rioadi/img/logo login page.png" style="height:100%;width:60%"></a>
               </div>
 
               @else
-              <div class="image">
+              <!-- <div class="image">
                   <img src="/Rioadi/img/logo.png" class="img-circle elevation-2" alt="User Image">
-              </div>
+              </div> -->
               <div class="info">
-                  <a href="{{route('dashboard-admin')}}" class="d-block"><h5><strong>Go-BLOG Dev</strong></h5></a>
+                  <a href="{{route('dashboard-admin')}}" class="d-block"><img src="/Rioadi/img/logo login page.png" style="height:100%;width:60%"></a>
               </div>
               @endif
 
@@ -39,7 +39,7 @@
                 <img src="/Rioadi/img/user.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                <a class="d-block">Hi, {{ auth()->user()->name }}</a>
             </div>
         </div>
 

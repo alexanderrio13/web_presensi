@@ -17,20 +17,68 @@
     <link rel="stylesheet" href="{{ asset('AdminLte/dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
     <style>
-        body {
-          background-image: url('/Rioadi/img/manbg.jpg');
-          background-attachment: fixed;
-          background-size: cover;
-        }
-        .centered {
+    html, body {
+        height: 100%;
+    }
+    html { background: #E1F3FF;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 30px;
+
+     }
+        body {background: linear-gradient(127deg, #A6EDFF, #0E9AA9, #E1F3FF);
+    background-size: 800% 800%;
+    border-radius: 40px;
+    padding: 10px;
+
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 9%}
+    50%{background-position:100% 92%}
+    100%{background-position:0% 9%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 9%}
+    50%{background-position:100% 92%}
+    100%{background-position:0% 9%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 9%}
+    50%{background-position:100% 92%}
+    100%{background-position:0% 9%}
+}
+        .centered_left {
+          padding-top: 60px;
+          padding-right: 5px;
+
+          padding-left: 5px;
+          display: inline-block;
           border-radius: 25px;
-          position: relative;
-          top: 50%;
+          position: fixed;
+          top: 0%;
           left: 20%;
 
           /* bring your own prefixes */
           transform: translate(-170%, 30%);
+        }
+        .centered_right {
+          padding-top: 50px;
+          padding-right: 5px;
+          padding-bottom: 50px;
+          padding-left: 5px;
+          display: inline-block;
+          position: fixed;
+          top: 0%;
+          left: 20%;
+
+          /* bring your own prefixes */
+          transform: translate(-200%, 30%);
         }
         .child_centered {
           border-radius: 25px;
@@ -41,10 +89,27 @@
           /* bring your own prefixes */
           transform: translate(-170%, 30%);
         }
+        .padding{
+          padding-top: 10px;
+
+        }
+        .zoom {
+          padding: 50px;
+
+          transition: transform .4s; /* Animation */
+          width: 200px;
+          height: 200px;
+          margin: 0 auto;
+        }
+
+        .zoom:hover {
+          transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
     </style>
 </head>
 <body>
- <div class="centered" style="width:400px;height:550px;background-color:#EEFCFC;top:50%;left:50%;">
+<div class="padding" style="background:transparent">
+ <div class="centered_left" style="width:400px;height:550px;background-color:#E1F3FF;left:50%;">
     <div class="login-box" style="margin:0 auto;">
         <div class="login-logo">
             <!-- <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a> -->
@@ -52,7 +117,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="card" style="border-radius: 25px" >
-            <div class="card-body login-card-body">
+            <div class="card-body login-card-body" style="background-color:#E1F3FF">
                 <p class="login-box-msg">Sign in to start your session</p>
 
                 <form action="{{ route('postlogin') }}" method="post">
@@ -101,6 +166,12 @@
     </div>
     <!-- /.login-box -->
   </div>
+  <div class="centered_right" style="width:650px;height:1px;background-color:transparent;left:118%;">
+
+    <img src="Rioadi/img/man.png" style="width:1000px;height:725px;" class="zoom">
+
+ </div>
+</div>
     <!-- jQuery -->
     @include('Template.script')
 
