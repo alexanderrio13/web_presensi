@@ -123,7 +123,7 @@
               <form action="{{ route('simpanregistrasi') }}" method="post">
                   {{ csrf_field() }}
                   <div class="input-group mb-3">
-                      <input type="text" class="form-control" name="name" placeholder="Full name">
+                      <input type="text" class="form-control" name="name" placeholder="Full name" maxlength="19">
                       <div class="input-group-append">
                           <div class="input-group-text">
                               <span class="fas fa-user"></span>

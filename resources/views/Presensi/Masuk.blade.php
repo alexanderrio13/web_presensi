@@ -7,15 +7,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Absen Masuk</title>
     @include('Template.head')
+    <style type="text/css">
+        #results { padding:10px; border:1px solid; border-width:0px; border-radius: 5px;background:#ccc; }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-    <style type="text/css">
-        #results { padding:20px; border:1px solid; background:#ccc; }
-    </style>
     <script src="{{ asset('Js/jam.js') }}"></script>
     <style>
         #watch {
@@ -43,8 +40,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         .part1 {
             position: absolute;
-            left: 0;
-            top: 0;
+            left: 10px;
+            top: 140px;
+
         }
         .hidden-div {
         visibility:hidden;
@@ -126,14 +124,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div class="parts-container">
                                     <div id="my_camera" style="margin:0 auto;" ></div>
                                     <br/>
-                                    <div id="show">
+                                    <div id="show" class="parts-container">
                                     <input type=button class="btn btn-info" value="Take Picture" onClick="take_snapshot()">
                                     </div>
                                     <input type="hidden" name="image_in" class="image-tag">
-                                    <div id="results" class="part1"></div>
+
 
                                   </div>
                                   <div id="hide" class="hidden-div">
+                                    <div id="results" class="part1"></div>
                                     <div id="left">
                                           <button type="submit" class="btn btn-info"><i class="fas fa-check"></i> Submit</button>
                                     </div>

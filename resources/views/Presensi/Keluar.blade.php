@@ -7,15 +7,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Absen Pulang</title>
     @include('Template.head')
+    <style type="text/css">
+        #results { padding:10px; border:1px solid; border-width:0px; border-radius: 5px;background:#ccc; }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-    <style type="text/css">
-        #results { padding:20px; border:1px solid; background:#ccc; }
-    </style>
     <script src="{{ asset('Js/jam.js') }}"></script>
     <style>
         #watch {
@@ -43,8 +40,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         .part1 {
             position: absolute;
-            left: 0;
-            top: 0;
+            left: 10px;
+            top: 140px;
+
         }
         .hidden-div {
         visibility:hidden;
@@ -116,35 +114,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </script>
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <h6 class="m-0 text-dark"><i class="fas fa-camera" aria-hidden="true"></i> Take Your Picture</h6>
-                            </div>
-                            <form id="left" action="{{ route('ubah-presensi') }}" method="post">
-                                {{ csrf_field() }}
+                                <div class="form-group">
+
+                                    <h6 class="m-0 text-dark"><i class="fas fa-camera" aria-hidden="true"></i> Take Your Picture</h6>
+                                </div>
+                              <form id="left" action="{{ route('ubah-presensi') }}" method="post">
+                                  {{ csrf_field() }}
                                 <center>
                                   <div class="parts-container">
                                     <div id="my_camera" style="margin:0 auto;" ></div>
                                     <br/>
-                                    <div id="show">
+                                    <div id="show" class="parts-container">
                                     <input type=button class="btn btn-dark" value="Take Picture" onClick="take_snapshot()">
                                     </div>
-                                    <input type="hidden" name="image_in" class="image-tag">
+                                    <input type="hidden" name="image_out" class="image-tag">
+
+
+                                  </div>
+                                  <div id="hide" class="hidden-div">
                                     <div id="results" class="part1"></div>
-                                    <div id="hide" class="hidden-div">
-                                      <div id="left">
-                                            <button type="submit" class="btn btn-dark"><i class="fas fa-check"></i> Submit</button>
-                                      </div>
-                                      <a href="/laman-presensi/keluar" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> Retake</a>
-                                      <!-- <div id="right">
-                                        <form id="right" method="get" action="{{route('laman-presensi')}}">
-                                          <button type="submit" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> Retake</button>
-                                        </form>
-                                      </div> -->
+                                    <div id="left">
+                                          <button type="submit" class="btn btn-dark"><i class="fas fa-check"></i> Submit</button>
                                     </div>
+                                      <a href="/laman-presensi/keluar" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> Retake</a>
                                   </div>
                                 </center>
-                            </form>
+                              </form>
                         </div>
+
                     </div>
                 </div>
             </div>

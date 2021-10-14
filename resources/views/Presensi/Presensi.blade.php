@@ -7,9 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Presensi</title>
     @include('Template.head')
-    <style type="text/css">
-        #results { padding:20px; border:1px solid; background:#ccc; }
-    </style>
+    
     <script src="{{ asset('Js/jam.js') }}"></script>
     <style>
         #watch {

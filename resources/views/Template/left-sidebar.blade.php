@@ -65,6 +65,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('filter-data-karyawan')}}" class="nav-link ">
+                        <i class="nav-icon fa fa-table"></i>
+                        <p>
+                            History
+                        </p>
+                    </a>
+                  </li>
                 @endif
                 @if (auth()->user()->level == "admin")
                 <li class="nav-item">
@@ -76,6 +84,7 @@
                     </a>
                 </li>
                 @endif
+                @if (auth()->user()->level == "admin")
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fa fa-table"></i>
@@ -85,24 +94,15 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        @if (auth()->user()->level == "karyawan")
-                        <li class="nav-item">
-                            <a href="{{route('filter-data-karyawan')}}" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Presensi Per Karyawan</p>
-                            </a>
-                        </li>
-                        @endif
-                        @if (auth()->user()->level == "admin")
                         <li class="nav-item">
                             <a href="{{route('filter-data')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Presensi Keseluruhan</p>
+                                <p>Presensi Karyawan</p>
                             </a>
                         </li>
-                        @endif
                     </ul>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
