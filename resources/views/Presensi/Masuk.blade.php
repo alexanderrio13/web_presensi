@@ -57,7 +57,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 <body class="hold-transition sidebar-mini" onload="realtimeClock()">
-
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -134,6 +133,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <div id="hide" class="hidden-div">
                                     <div id="results" class="part1"></div>
                                     <div id="left">
+
                                           <button type="submit" class="btn btn-info"><i class="fas fa-check"></i> Submit</button>
                                     </div>
                                       <a href="/laman-presensi/masuk" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> Retake</a>

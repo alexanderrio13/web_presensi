@@ -118,6 +118,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     <h6 class="m-0 text-dark"><i class="fas fa-camera" aria-hidden="true"></i> Take Your Picture</h6>
                                 </div>
+                                @if(session()->has('message'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
                               <form id="left" action="{{ route('ubah-presensi') }}" method="post">
                                   {{ csrf_field() }}
                                 <center>

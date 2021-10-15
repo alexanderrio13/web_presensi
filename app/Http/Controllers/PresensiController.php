@@ -8,6 +8,7 @@ use App\Models\Presensi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Auth;
 use Log;
@@ -85,7 +86,8 @@ class PresensiController extends Controller
             ['tgl','=',$tanggal],
         ])->first();
         if ($presensi){
-            dd("Anda sudah presensi masuk");
+            Session::flash('warning','Anda sudah presensi masuk');
+            return redirect('/laman-presensi');
         }else{
             Presensi::create([
                 'user_id' => auth()->user()->id,
@@ -94,9 +96,8 @@ class PresensiController extends Controller
                 'image_in' => $fileName,
             ]);
         }
-
-
-        return redirect('/laman-presensi')->with('success', 'Data submitted Successfully');
+        Session::flash('sukses','Data submitted Successfully');
+        return redirect('/laman-presensi');
     }
 
     /**
@@ -159,9 +160,11 @@ class PresensiController extends Controller
 
         if ($presensi->jamkeluar == ""){
             $presensi->update($dt);
-            return redirect('/laman-presensi')->with('success', 'Data submitted Successfully');
+            Session::flash('sukses','Data submitted Successfully');
+            return redirect('/laman-presensi');
         }else{
-            dd("Anda sudah presensi pulang");
+            Session::flash('warning','Anda sudah presensi pulang');
+            return redirect('/laman-presensi');
         }
     }
 

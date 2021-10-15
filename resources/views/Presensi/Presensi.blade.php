@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Presensi</title>
     @include('Template.head')
-    
+
     <script src="{{ asset('Js/jam.js') }}"></script>
     <style>
         #watch {
@@ -55,8 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main Sidebar Container -->
         @include('Template.left-sidebar')
-        <!-- Session message for take snapshot  -->
-        @include('Presensi.msg')
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -102,6 +101,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               el_up.innerHTML = day+', '+month+' '+date+' '+year;
                           </script>
                         </div>
+                        @if ($message = Session::get('warning'))
+                        <div class="alert alert-warning alert-block">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          <strong>{{ $message }}</strong>
+                        </div>
+                        @endif
+                        @if ($message = Session::get('sukses'))
+                        <div class="alert alert-success alert-block">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          <strong>{{ $message }}</strong>
+                        </div>
+                        @endif
                         <div class="card-body">
 
                                 <div class="form-group">
