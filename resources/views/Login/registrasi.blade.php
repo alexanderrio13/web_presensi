@@ -19,16 +19,8 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
     <style>
-    html, body {
-        height: 100%;
-    }
-    html { background: #E1F3FF;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 30px;
 
-     }
-        body {background: linear-gradient(127deg, #A6EDFF, #0E9AA9, #E1F3FF);
+        body {background: linear-gradient(127deg, #0E9AA9, #E1F3FF, #E1F3FF);
     background-size: 800% 800%;
     border-radius: 40px;
     padding: 10px;
@@ -103,13 +95,13 @@
         }
 
         .zoom:hover {
-          transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+          transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
     </style>
 </head>
 <body>
 <div class="padding" style="background:transparent">
- <div class="centered_left" style="width:400px;height:550px;background-color:#E1F3FF;left:50%;">
+ <div class="centered_left" style="width:400px;height:550px;background-color:#E1F3FF;left:50%;border:1px solid;border-width:2px; border-color:#0E9AA9">
     <div class="login-box" style="margin:0 auto;">
         <div class="login-logo">
             <!-- <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a> -->

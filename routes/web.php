@@ -23,7 +23,9 @@ Route::group(['middleware' => ['auth','ceklevel:karyawan']], function () {
 });
 Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
     route::get('/admin-dashboard',[HomeController::class,'adminIndex'])->name('dashboard-admin');
+    Route::get('/karyawan/hapus/{id}',[HomeController::class,'hapus']);
 });
+
 
 Route::group(['middleware' => ['auth','ceklevel:karyawan']], function () {
     route::post('/simpan-masuk',[PresensiController::class,'store'])->name('simpan-masuk');
