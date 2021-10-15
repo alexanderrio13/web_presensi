@@ -23,6 +23,10 @@ Route::group(['middleware' => ['auth','ceklevel:karyawan']], function () {
 });
 Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
     route::get('/admin-dashboard',[HomeController::class,'adminIndex'])->name('dashboard-admin');
+    Route::get('/karyawan/tambah/',[HomeController::class,'tambah']);
+    Route::post('/karyawan/store',[HomeController::class,'store']);
+    Route::get('/karyawan/edit/{id}',[HomeController::class,'edit']);
+    Route::post('/karyawan/update',[HomeController::class,'update']);
     Route::get('/karyawan/hapus/{id}',[HomeController::class,'hapus']);
 });
 
@@ -37,4 +41,4 @@ Route::group(['middleware' => ['auth','ceklevel:karyawan']], function () {
 Route::get('filter-data',[PresensiController::class,'halamanrekap'])->name('filter-data');
 Route::post('filter-data/result',[PresensiController::class,'tampildatakeseluruhan'])->name('filter-data-keseluruhan');
 // Route::get('filter-data/{tglawal}/{tglakhir}/{user_id}',[PresensiController::class,'tampildatakeseluruhan'])->name('filter-data-keseluruhan');
-Route::get('filter-data-karyawan',[PresensiController::class,'tampildataperkaryawan'])->name('filter-data-karyawan');
+Route::get('history',[PresensiController::class,'history'])->name('history');

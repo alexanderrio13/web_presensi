@@ -138,6 +138,7 @@ table.d {
 
 
                     <br />
+                    <a href="/karyawan/tambah" type="button" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i></i> Add New</a>
                     <div class="form-group">
                         <table class="w3-table-all" style="  table-layout: fixed;width: 100%;" >
                             <tr class="w3-hover-cyan">
@@ -145,6 +146,7 @@ table.d {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Level</th>
+                                <th>Position</th>
                                 <th>Action</th>
                             </tr>
                             @foreach ($karyawan as $k)
@@ -153,8 +155,10 @@ table.d {
                                 <td>{{$k->name}}</td>
                                 <td>{{$k->email}}</td>
                                 <td>{{$k->level}}</td>
+                                <td>{{$k->jabatan}}</td>
                                 <td>
                                     <a href="/karyawan/hapus/{{$k->id}}" onclick="return confirm('Are you sure want to delete {{$k->name}} ?')" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                    <a href="/karyawan/edit/{{$k->id}}" type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
                                 </td>
 
 
