@@ -143,7 +143,7 @@
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                            <input type="button" class="btn btn-default btn-block" onclick="location.href='{{route('registrasi')}}';" value="Register" />
+                            <!-- <input type="button" class="btn btn-default btn-block" onclick="location.href='{{route('registrasi')}}';" value="Register" /> -->
                                 <!-- <button type="submit" class="btn btn-default btn-block">Register</button> -->
 
                         </div>

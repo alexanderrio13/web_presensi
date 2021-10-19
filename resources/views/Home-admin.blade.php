@@ -12,8 +12,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Go-Blog | Admin Dashboard</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!-- Bootstrap -->
-    <!-- <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
+    <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -27,17 +27,54 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <style>
     table {
-  border-collapse: collapse;
-  border: 1px solid black;
-}
+      border-collapse: collapse;
+      border: 1px solid black;
+    }
 
-th,td {
-  border: 1px solid black;
-}
-table.d {
-  table-layout: fixed;
-  width: 100%;
-}
+    th,td {
+      border: 1px solid black;
+    }
+    table.d {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    * {
+    box-sizing: border-box;
+    }
+
+    #myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 20%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    float:right;
+    }
+
+    #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+    text-align: left;
+    padding: 12px;
+    }
+
+    #myTable tr {
+    border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+    background-color: #f1f1f1;
+    }
+
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -80,46 +117,37 @@ table.d {
                   <div class="x_content">
                     <div class="row">
                       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="tile-stats">
+                        <div class="tile-stats" style="height:125px">
                           <div class="icon"><i class="fa fa-user"></i>
                           </div>
                           <div class="count">
-
                             {{$sudahpresensi->count()}}
-
-
                           </div>
-
                           <h3>Sudah Presensi</h3>
-                          <p>Lorem ipsum psdea itgum rixt.</p>
                         </div>
                       </div>
                       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="tile-stats">
+                        <div class="tile-stats" style="height:125px">
                           <div class="icon"><i class="fa fa-warning"></i>
                           </div>
                           <div class="count">
                             {{$karyawan->count() - $sudahpresensi->count() }}
                           </div>
-
                           <h3>Belum Presensi</h3>
-                          <p>Lorem ipsum psdea itgum rixt.</p>
                         </div>
                       </div>
                       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="tile-stats">
+                        <div class="tile-stats" style="height:125px">
                           <div class="icon"><i class="fa fa-bell-slash"></i>
                           </div>
                           <div class="count">
                             {{$terlambat->count()}}
                           </div>
-
                           <h3>Terlambat</h3>
-                          <p>Lorem ipsum psdea itgum rixt.</p>
                         </div>
                       </div>
                       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="tile-stats">
+                        <div class="tile-stats" style="height:125px">
                           <div class="icon"><i class="fa fa-group"></i>
                           </div>
                           <div class="count">
@@ -127,7 +155,6 @@ table.d {
                           </div>
 
                           <h3>Total Karyawan</h3>
-                          <p>Lorem ipsum psdea itgum rixt.</p>
                         </div>
                       </div>
                     </div>
@@ -138,15 +165,21 @@ table.d {
 
 
                     <br />
-                    <a href="/karyawan/tambah" type="button" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i></i> Add New</a>
                     <div class="form-group">
-                        <table class="w3-table-all" style="  table-layout: fixed;width: 100%;" >
+                    <div style="float:left;margin-left:10px">
+                      <h2 class="m-0 text-dark"><i class="fas fa-user-tie"></i><strong> Users </strong></h2>
+                    </div>
+                    <div style="float:left;margin-left:15px">
+                      <a href="/karyawan/tambah" style="float:left" type="button" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i></i> Add New</a>
+                    </div>
+                      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                        <table id="myTable" class="w3-table-all js-sort-table" style="  table-layout: fixed;width: 100%;" >
                             <tr class="w3-hover-cyan">
 
-                                <th>Name</th>
+                                <th class="js-sort-string">Name</th>
                                 <th>Email</th>
                                 <th>Level</th>
-                                <th>Position</th>
+                                <th class="js-sort-string">Position</th>
                                 <th>Action</th>
                             </tr>
                             @foreach ($karyawan as $k)
@@ -190,7 +223,26 @@ table.d {
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
     <!-- jQuery -->
     @include('Template.script')
 </body>

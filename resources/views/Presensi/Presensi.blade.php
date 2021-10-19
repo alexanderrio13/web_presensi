@@ -179,15 +179,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <span class="badge badge-success">On Time</span>
                     @endif
                     </p>
-                    <p> Presensi Keluar : <strong>{{ $item->jamkeluar }}</strong> </p>
-                    <p> Jam Kerja : <strong>{{ $item->jamkerja }}</strong> </p>
-                    <p> Status Lembur :
-                    @if ($item->jamkerja > '08:59:59')
-                    <span class="badge badge-success">Dapat Lembur</span>
-                    @else
-                    <span class="badge badge-warning">Tidak Lembur</span>
-                    @endif
-                    </p>
+                    <p> Presensi Keluar : <strong>{{ $item->jamkeluar ?? '-' }}</strong> </p>
+                    <p> Jam Kerja : <strong>{{ $item->jamkerja ?? '-' }}</strong> </p>
                     @endforeach
 
 

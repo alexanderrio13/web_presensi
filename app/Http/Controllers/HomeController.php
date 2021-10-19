@@ -38,7 +38,7 @@ class HomeController extends Controller
       DB::table('users')->insert([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => $request->password,
+        'password' => bcrypt($request->password),
         'jabatan' => $request->jabatan,
         'level' => $request->get('level')
       ]);
@@ -61,4 +61,5 @@ class HomeController extends Controller
       return redirect('/admin-dashboard');
 
     }
+
 }

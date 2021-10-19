@@ -108,12 +108,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"><i class="fas fa-user-tie"></i> <strong> Add User</strong></h1>
+                            <h1 class="m-0 text-dark"><i class="fa fa-file"></i> Add Form </h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Add New User</li>
+                                <li class="breadcrumb-item active">Add Form Lembur</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -123,42 +123,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Main content -->
             <div class="container" style="width:500px;">
-              <form action="/karyawan/store" method="post">
+              <form action="/lembur/store" method="post">
                 {{ csrf_field() }}
               <div class="row">
                 <div class="col-25">
-                  <label for="fname">Name</label>
+                  <label for="fname">Tugas Yang Dikerjakan</label>
                 </div>
                 <div class="col-75">
-                  <input type="text" class="form-control" name="name" maxlength="19" required>
+                  <textarea class="form-control" name="desc_lembur" rows="10" cols="30" required></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-25">
-                  <label for="lname">Email</label>
+                  <label for="lname">Tanggal</label>
                 </div>
                 <div class="col-75">
-                  <input type="email" class="form-control" name="email" required>
+                  <input type="date" class="form-control" name="tgl" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-25">
-                  <label for="fname">Password</label>
+                  <label for="lname">Mulai</label>
                 </div>
                 <div class="col-75">
-                  <input type="password" class="form-control" name="password" required>
+                  <input type="time" class="form-control" name="lemburmasuk" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-25">
-                  <label for="lname">Posisiton</label>
+                  <label for="fname">Selesai</label>
                 </div>
                 <div class="col-75">
-                  <input type="jabatan" class="form-control" name="jabatan" required>
+                  <input type="time" class="form-control" name="lemburkeluar" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="lname">Mengetahui SPV</label>
+                </div>
+                <div class="col-75">
+                  <p>
+                    <input type="radio" name="statuslembur" value="yes" checked>Yes</input>
+                    </p>
+                    <p>
+                    <input type="radio" name="statuslembur" value="no">No</input>
+                    </p>
                 </div>
               </div>
               <div class="input-group mb-3">
-                <input name="level" type="hidden" value="karyawan">
+                <input name="user_id" type="hidden" value={{$user_id}}>
 
               </div>
               <div class="col-4">

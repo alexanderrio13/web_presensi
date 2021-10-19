@@ -67,15 +67,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="card card-info card-outline" style="width:100%;margin-right:10px;margin-left:10px">
                       <div class="card-header">Lihat Data</div>
                         <div class="card-body">
-                          <form action="{{route('filter-result')}}" method="post">
+                          <form action="{{route('filter-result-all')}}" method="post">
                             {{ csrf_field() }}
                               <div class="form-group">
                                     <select id="select-state" required="required" class="form-control" name="user_id" placeholder="Select user..." onchange="testValue(this);">
-                                        @foreach ($users as $user )
-                                            <option></option>
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+
+
+
                                             <option value="all users">(All Users)</option>
-                                        @endforeach
+
                                         </select>
                                 </div>
                                 <div class="form-group">
@@ -86,8 +86,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <label for="label">Tanggal Akhir</label>
                                     <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                                 </div>
-                                <div class="form-group">
-                                  <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                                <div class="form-group" style="position:relative;">
+                                  <div style="float:left;">
+                                    <a href="/filter-data" class="btn btn-warning"> Back </a>
+                                  </div>
+                                  <div style="float:left;margin-left:5px">
+                                    <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                                  </div>
                                 </div>
                           </form>
                         </div><!-- /.container-fluid -->
@@ -120,23 +125,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           sortField: 'text'
       });
     });
-
-    function testValue(selection) {
-    var x = document.getElementById("openwindow");
-      if (selection.value == "all users") {
-
-         window.open('/filter-data/all','_self');
-
-        }
-
-      else {
-
-
-        }
-    }
-
     </script>
     <!-- jQuery -->
-    
+filter-result
+
 </body>
 </html>

@@ -8,6 +8,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Go-Blog | Laporan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
+    <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
@@ -51,7 +55,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   background-color: #f1f1f1;
   }
 </style>
-
 <body class="hold-transition sidebar-mini">
 
     <div class="wrapper">
@@ -91,17 +94,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="card-header">Lihat Data</div>
                         <div class="card-body">
                           <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                          <form action="{{route('filter-result')}}" method="post">
+                          <form action="{{route('filter-result-all')}}" method="post">
                             {{ csrf_field() }}
-
                             <div class="form-group">
-                              <select id="select-state" required="required" class="form-control" name="user_id" placeholder="Select user..." onchange="testValue(this);">
-                                  @foreach ($users as $user )
-                                      <option></option>
-                                      <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                      <option value="all users">(All Users)</option>
-                                  @endforeach
-                                  </select>
+                               <select id="select-state" required="required" class="form-control" name="user_id" placeholder="Select user..." onchange="testValue(this);">
+                                 @foreach ($users as $user )
+                                     <option></option>
+                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                     <option value="all users">(All Users)</option>
+                                 @endforeach
+                                </select>
                               </div>
                             <div class="form-group">
                                 <label for="label">Tanggal Awal</label>
@@ -116,18 +118,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                           </form>
                             <div class="form-group">
-                                <table id="myTable" class="w3-table-all" border="1" style="  table-layout: fixed;width: 100%;">
+                                <table class="w3-table-all js-sort-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
                                     <tr class="w3-hover-cyan">
-                                        <th>Karyawan</th>
-                                        <th>Tanggal</th>
+                                        <th class="js-sort-string">Karyawan</th>
+                                        <th class="js-sort-date">Tanggal</th>
                                         <th>Masuk</th>
                                         <th>Pulang</th>
                                         <th>Jumlah Jam Kerja</th>
                                         <th>Status Presensi</th>
+
                                     </tr>
                                     @foreach ($presensi as $item)
                                     <tr class="w3-hover-cyan">
-                                        <td>{{ $item->user->name }}</td>
+                                        <td>{{ $item->user->name ?? $item->user_id }}</td>
                                         <td>{{ $item->tgl }}</td>
                                         <td>{{ $item->jammasuk }}</td>
                                         <td>{{ $item->jamkeluar }}</td>
@@ -177,6 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       });
     });
 
+
     function testValue(selection) {
     var x = document.getElementById("openwindow");
       if (selection.value == "all users") {
@@ -185,13 +189,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         }
 
-      // else {
-      //
-      //    window.open('filter-data/all','_self');
-      //   }
+      else {
+
+         window.open('/filter-data','_self');
+        }
     }
     </script>
     <!-- jQuery -->
-filter-result
+
 </body>
 </html>

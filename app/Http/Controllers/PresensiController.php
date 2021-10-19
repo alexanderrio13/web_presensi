@@ -6,6 +6,7 @@ use DateTime;
 use DateTimeZone;
 use App\Models\Presensi;
 use App\Models\User;
+use App\Models\Lembur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -113,20 +114,38 @@ class PresensiController extends Controller
 
     }
 
-
-    public function tampildatakeseluruhan(Request $req)
+    public function rekapresult(Request $req)
     {
-        // $user_id = Auth::user()->id;
+
         $presensi = Presensi::with('user')->whereBetween('tgl',[$req->get('tglawal'), $req->get('tglakhir')])->where('user_id',$req->get('user_id'))->orderBy('tgl','asc','user_id')->get();
-        $userId = $req->input('user_id');
-        return view('Presensi.Rekap-karyawan',compact('presensi','userId'));
+        // get hidden user id
+        // $userId = $req->input('user_id');
+        $users = User::where('level','=','karyawan')->get();
+        return view('Presensi.Rekap-karyawan',compact('presensi','users'));
     }
 
-    public function tampildataperkaryawan()
+    public function halamanrekapAll()
+    {
+        return view('Presensi.Halaman-rekap-karyawan-all');
+
+    }
+
+    public function rekapresultAll(Request $req)
+    {
+
+        $presensi = Presensi::with('user')->whereBetween('tgl',[$req->get('tglawal'), $req->get('tglakhir')])->orderBy('tgl','asc')->get();
+        // get hidden user id
+        // $userId = $req->input('user_id');
+        $users = User::where('level','=','karyawan')->get();
+        return view('Presensi.Rekap-karyawan-all',compact('presensi','users'));
+    }
+
+    public function history()
     {
         $user_id = Auth::user()->id;
         $presensi = Presensi::with('user')->where('user_id',$user_id)->get();
-        return view('Presensi.Rekap-per-karyawan',compact('presensi'));
+        $lembur = Lembur::with('user')->where('user_id',$user_id)->get();
+        return view('Presensi.Rekap-per-karyawan',compact('presensi','lembur'));
     }
 
 
@@ -135,6 +154,7 @@ class PresensiController extends Controller
         $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
+        $diff = "14:07:12";
         $img =  $request->get('image_out');
         $folderPath = "Rioadi/uploads_out/";
         $image_parts = explode(";base64,", $img);
@@ -155,7 +175,7 @@ class PresensiController extends Controller
         $dt=[
             'jamkeluar' => $localtime,
             'image_out' => $fileName,
-            'jamkerja' => date('H:i:s', strtotime($localtime) - strtotime($presensi->jammasuk))
+            'jamkerja' => date('H:i:s', strtotime($localtime) - strtotime($presensi->jammasuk) - strtotime($diff))
         ];
 
         if ($presensi->jamkeluar == ""){
@@ -167,6 +187,37 @@ class PresensiController extends Controller
             return redirect('/laman-presensi');
         }
     }
+
+    public function lembur(){
+      $user_id = Auth::user()->id;
+      return view('Presensi.Form-lembur',compact('user_id'));
+    }
+
+    public function lemburstore(Request $request){
+      $timezone = 'Asia/Jakarta';
+      $date = new DateTime('now', new DateTimeZone($timezone));
+      $diff = "14:07:00";
+      DB::table('lemburs')->insert([
+        'user_id' => $request->get('user_id'),
+        'tgl' => $request->tgl,
+        'lemburmasuk' => $request->lemburmasuk,
+        'lemburkeluar' => $request->lemburkeluar,
+        'statuslembur' => $request->statuslembur,
+        'desc_lembur' => $request->desc_lembur,
+        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        'lamalembur' => date('H:i', strtotime($request->lemburkeluar) - strtotime($request->lemburmasuk) - strtotime($diff))
+
+      ]);
+
+      return redirect('/history');
+    }
+
+    public function rekaplembur(){
+      $lembur = Lembur::with('user')->get();
+      return view('Presensi.Rekap-lembur-karyawan',compact('lembur'));
+    }
+
 
     public function update(Request $request, $id)
     {

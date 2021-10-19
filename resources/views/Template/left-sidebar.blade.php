@@ -66,7 +66,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('filter-data-karyawan')}}" class="nav-link ">
+                    <a href="{{route('form-lembur')}}" class="nav-link ">
+                        <i class="nav-icon fa fa-file"></i>
+                        <p>
+                            Form Lembur
+                        </p>
+                    </a>
+                  </li>
+                <li class="nav-item">
+                    <a href="{{route('history')}}" class="nav-link ">
                         <i class="nav-icon fa fa-table"></i>
                         <p>
                             History
@@ -98,6 +106,14 @@
                             <a href="{{route('filter-data')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Presensi Karyawan</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('rekap-lembur')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lembur Karyawan</p>
                             </a>
                         </li>
                     </ul>
