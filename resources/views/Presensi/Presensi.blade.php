@@ -7,7 +7,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Presensi</title>
     @include('Template.head')
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="{{ asset('Js/jam.js') }}"></script>
     <style>
         #watch {
@@ -41,6 +42,74 @@ scratch. This page gets rid of all links and provides the needed markup only.
         .hidden-div {
         visibility:hidden;
     }
+/* notification css */
+    .alert{
+  /* background: #ffdb9b; */
+  padding: 20px 40px;
+  min-width: 420px;
+  right: 0;
+  top: 10px;
+  border-radius: 4px;
+  opacity: 0.4;
+
+
+  }
+
+  .alert.showAlert{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .alert.show{
+    animation: show_slide 6s ease forwards;
+  }
+  @keyframes show_slide {
+    0%{
+      transform: translateX(100%);
+    }
+    40%{
+      transform: translateX(-10%);
+    }
+    80%{
+      transform: translateX(0%);
+    }
+    100%{
+      transform: translateX(-10px);
+    }
+  }
+  .alert.hide{
+    animation: hide_slide 6s ease forwards;
+  }
+  @keyframes hide_slide {
+    0%{
+      transform: translateX(-10px);
+    }
+    40%{
+      transform: translateX(0%);
+    }
+    80%{
+      transform: translateX(-10%);
+    }
+    100%{
+      transform: translateX(400%);
+    }
+  }
+  .alert .fa-exclamation-circle{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ce8500;
+    font-size: 30px;
+  }
+
+  .alert .fa-check-circle{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: green;
+    font-size: 30px;
+  }
 
     </style>
 
@@ -102,15 +171,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </script>
                         </div>
                         @if ($message = Session::get('warning'))
-                        <div class="alert alert-warning alert-block">
-                          <button type="button" class="close" data-dismiss="alert">×</button>
-                          <strong>{{ $message }}</strong>
+                        <div class="alert alert-warning show showAlert show_slide hide" style="border-left: 8px solid #ffa502;">
+                          <button type="button" class="close" data-dismiss="alert"><span class="fas fa-times"></span></button>
+                          <span class="fas fa-exclamation-circle"></span>
+                          <span style="padding: 0 20px;font-size: 18px;color: #ce8500;">{{ $message }}</span>
                         </div>
                         @endif
                         @if ($message = Session::get('sukses'))
-                        <div class="alert alert-success alert-block">
-                          <button type="button" class="close" data-dismiss="alert">×</button>
-                          <strong>{{ $message }}</strong>
+                        <div class="alert alert-success show hide showAlert show_slide" style="border-left: 8px solid green;">
+                          <button type="button" class="close" data-dismiss="alert"><span class="fas fa-times"></span></button>
+                          <span class="fas fa-check-circle"></span>
+                          <span style="padding: 0 20px;font-size: 18px;color: white">{{ $message }}</span>
                         </div>
                         @endif
                         <div class="card-body">
@@ -194,7 +265,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
+    <script>
+    // $('button').click(function(){
+    //        $('.alert').addClass("show");
+    //        $('.alert').removeClass("hide");
+    //        $('.alert').addClass("showAlert");
+    //        setTimeout(function(){
+    //          $('.alert').removeClass("show");
+    //          $('.alert').addClass("hide");
+    //        },5000);
+    //      });
+    //      $('.close-btn').click(function(){
+    //        $('.alert').removeClass("show");
+    //        $('.alert').addClass("hide");
+    //      });
+    </script>
     <!-- jQuery -->
     @include('Template.script')
 
