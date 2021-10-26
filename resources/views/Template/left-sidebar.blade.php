@@ -1,3 +1,23 @@
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+<style type="text/css">
+
+    #p {
+      color: #058498;
+			font-size: 13pt;
+			font-weight: bold;
+      font-family:'Poppins';
+			margin-bottom:-50;
+    }
+			#p1 {
+        color:#F2612A;
+  			font-size: 12pt;
+  			font-weight: normal;
+        font-family:'Poppins';
+  			letter-spacing:4pt;
+      }
+</style>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <!-- <a href="#" class="brand-link"> -->
@@ -11,16 +31,32 @@
               <!-- <div class="image">
                   <img src="/Rioadi/img/logo.png" class="img-circle elevation-2" alt="User Image">
               </div> -->
-              <div class="info">
-                  <a href="{{route('dashboard-karyawan')}}" class="d-block"><img src="/Rioadi/img/logo login page.png" style="height:100%;width:60%"></a>
-              </div>
+              <div class="image">
+                  <a href="{{route('dashboard-karyawan')}}" class="d-block"><img src="/Rioadi/img/logo.png"></a>
 
+              </div>
+              <div class="info">
+                  <a id="p" class="d-block">
+                    GO-BLOG
+                  </a>
+                  <a id="p1" class="d-block">
+                    DEVELOPER
+                  </a>
+              </div>
               @else
               <!-- <div class="image">
                   <img src="/Rioadi/img/logo.png" class="img-circle elevation-2" alt="User Image">
               </div> -->
+              <div class="image">
+                  <a href="{{route('dashboard-admin')}}" class="d-block"><img src="/Rioadi/img/logo.png"></a>
+              </div>
               <div class="info">
-                  <a href="{{route('dashboard-admin')}}" class="d-block"><img src="/Rioadi/img/logo login page.png" style="height:100%;width:60%"></a>
+                  <a id="p" class="d-block">
+                    GO-BLOG
+                  </a>
+                  <a id="p1" class="d-block">
+                    DEVELOPER
+                  </a>
               </div>
               @endif
 

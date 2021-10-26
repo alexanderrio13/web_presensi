@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Go-Blog | Rekap Lembur</title>
         <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
     <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
     <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
@@ -21,27 +21,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('Template.head')
 <style>
 
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
+
+  tr:nth-child(even){
+    background-color: #f2f2f2
+  }
+
   * {
   box-sizing: border-box;
   }
 
+  .input-icons i {
+         position: absolute;
+     }
+
+     .input-icons {
+         width: 100%;
+         margin-bottom: 10px;
+     }
+
+     .icon {
+         padding: 10px;
+         min-width: 40px;
+     }
+
+     .input-field {
+         width: 100%;
+         padding: 10px;
+         text-align: left;
+     }
+
   #myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 33.5%;
-  float:right;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
   margin-bottom: 12px;
+  float:right;
+  text-shadow: 0 0 1px white;
+  height: 40px;
   }
 
   #myTable {
   border-collapse: collapse;
   width: 100%;
   border: 1px solid #ddd;
-  font-size: 18px;
+  font-size: 17px;
   }
 
   #myTable th, #myTable td {
@@ -55,6 +95,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
+  }
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
+
+  table-container {
+    overflow: auto;
   }
 </style>
 </head>
@@ -97,27 +144,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="card-header">Lihat Data</div>
                         <div class="card-body">
                           <div class="form-group">
-                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-                              <table id="myTable" class="w3-table-all js-sort-table" border="1" style="  table-layout: fixed;width: 100%;">
-                                  <tr class="w3-hover-cyan">
-                                    <th class="js-sort-string">Nama</th>
-                                    <th>Tanggal</th>
-                                    <th>Mulai</th>
-                                    <th>Selesai</th>
-                                    <th>Jumlah Lembur</th>
-                                    <th>Pengerjaan</th>
-                                  </tr>
-                                  @foreach ($lembur as $l)
-                                  <tr class="w3-hover-cyan">
-                                    <td>{{ $l->user->name }}
-                                    <td>{{ $l->tgl }}</td>
-                                    <td>{{ $l->lemburmasuk }}</td>
-                                    <td>{{ $l->lemburkeluar }}</td>
-                                    <td>{{ $l->lamalembur }}</td>
-                                    <td>{{ $l->desc_lembur }}</td>
-                                  </tr>
-                                  @endforeach
-                              </table>
+                            <div style="max-width:400px;margin:auto;float:right">
+                              <div class="input-icons">
+                                <i class="fas fa-search icon"></i>
+                                <input type="text" id="myInput" class="input-field" onkeyup="myFunction()" placeholder="Search" title="Type in a name">
+                              </div>
+                            </div>
+                            <table id="myTable" class="table custom-table js-sort-table" border="1" style="  table-layout: fixed;width: 100%;">
+                                <tr style="background:#bab8b8">
+                                  <th class="js-sort-string">Nama</th>
+                                  <th>Tanggal</th>
+                                  <th>Mulai</th>
+                                  <th>Selesai</th>
+                                  <th>Jumlah Lembur</th>
+                                  <th>Mengetahui SPV</th>
+                                  <th>Pengerjaan</th>
+                                </tr>
+                                @foreach ($lembur as $l)
+                                <tr>
+                                  <td>{{ $l->user->name }}
+                                  <td>{{ $l->tgl }}</td>
+                                  <td>{{ $l->lemburmasuk }}</td>
+                                  <td>{{ $l->lemburkeluar }}</td>
+                                  <td>{{ $l->lamalembur }}</td>
+                                  <td>{{ $l->statuslembur }}</td>
+                                  <td>{{ $l->desc_lembur }}</td>
+                                </tr>
+                                @endforeach
+                            </table>
                           </div>
                         </div><!-- /.container-fluid -->
                       </div>
@@ -172,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </script>
     <!-- jQuery -->
-
+@include('Template.script')
 
 </body>
 </html>

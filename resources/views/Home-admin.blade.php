@@ -38,6 +38,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="AdminLte/dist/js/popper.min.js"></script>
     <script src="AdminLte/dist/js/bootstrap.min.js"></script>
     <script src="AdminLte/dist/js/main.js"></script>
+    <!-- chart src -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
     <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
     @include('Template.head')
@@ -156,60 +158,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="right_col" role="main" style="padding-left:10px;padding-right:10px">
-                    <div class="row justify-content-center">
-                        <div class="card card-info card-outline" style="width:100%;margin-right:10px;margin-left:10px;">
-                          <div class="card-header">
-                            <div style="float:left;margin-left:10px">
-                              <h2 class="m-0 text-dark"><i class="fas fa-clock"></i> Today's Precence(s) </h2>
-                            </div>
-                            <div style="float:right">
-                              <p id="GFG_UP"
-                              style="font-size: 25px;
-                                  font-weight: normal;">
-                              </p>
-                              <script>
-                                  var el_up = document.getElementById("GFG_UP");
-                                  var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                                  var day = days[new Date().getDay()];
-                                  var today = new Date();
-                                  var date = today.getDate();
-                                  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                  var month = months[new Date().getMonth()];
-                                  var year = today.getFullYear();
-                                  el_up.innerHTML = day+', '+month+' '+date+' '+year;
-                              </script>
-                            </div>
-                          </div>
-                        <div class="card-body">
+            <div class="right_col" role="main" style="padding-left:10px;padding-right:10px;">
 
 
-                      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="tile-stats" style="height:125px">
-                          <div class="icon"><i class="fa fa-user"></i>
-                          </div>
-                          <div class="count">
-                            {{$sudahpresensi->count()}}
-                          </div>
-                          <h3>Sudah Presensi</h3>
+              <div style="margin:auto;height:470px;">
+                <div class="row justify-content-center" style="width:50%;height:100%;float:left">
+                    <div class="card card-info card-outline" style="width:100%;margin-right:10px;margin-left:10px;">
+                      <div class="card-header">
+                        <div style="float:left;margin-left:10px">
+                          <h2 class="m-0 text-dark"><i class="fas fa-clock"></i> Today's Presence(s) </h2>
+                        </div>
+                        <div style="float:right">
+                          <p id="GFG_UP"
+                          style="font-size: 17px;
+                              font-weight: normal;">
+                          </p>
+                          <script>
+                              var el_up = document.getElementById("GFG_UP");
+                              var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                              var day = days[new Date().getDay()];
+                              var today = new Date();
+                              var date = today.getDate();
+                              var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                              var month = months[new Date().getMonth()];
+                              var year = today.getFullYear();
+                              el_up.innerHTML = day+', '+month+' '+date+' '+year;
+                          </script>
                         </div>
                       </div>
+                    <div style="height:50%;width:193%;padding:20px;padding-top:50px">
                       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="tile-stats" style="height:125px">
-                          <div class="icon"><i class="fa fa-warning"></i>
-                          </div>
-                          <div class="count">
-                            {{$karyawan->count() - $sudahpresensi->count() }}
-                          </div>
-                          <h3>Belum Presensi</h3>
-                        </div>
-                      </div>
-                      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="tile-stats" style="height:125px">
+                        <div class="tile-stats" style="height:125px;">
                           <div class="icon"><i class="fa fa-bell-slash"></i>
                           </div>
                           <div class="count">
-                            {{$terlambat->count()}}
+                            {{$today_terlambat->count()}}
                           </div>
                           <h3>Terlambat</h3>
                         </div>
@@ -219,15 +202,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <div class="icon"><i class="fa fa-group"></i>
                           </div>
                           <div class="count">
-                            {{$karyawan->count()}}
+                            {{$tot_karyawan->count()}}
                           </div>
 
                           <h3>Total Karyawan</h3>
                         </div>
                       </div>
                     </div>
+                <div style="height:50%;width:193%;padding:20px;padding-top:10px">
+                  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats" style="height:125px;">
+                      <div class="icon"><i class="fa fa-user"></i>
+                      </div>
+                      <div class="count">
+                        {{$today_presensi->count()}}
+                      </div>
+                      <h3>Sudah Presensi</h3>
                     </div>
                   </div>
+                  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats" style="height:125px">
+                      <div class="icon"><i class="fa fa-warning"></i>
+                      </div>
+                      <div class="count">
+                        {{$tot_karyawan->count() - $today_presensi->count() }}
+                      </div>
+                      <h3>Belum Presensi</h3>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div style="float:right;width:50%;height:100%;">
+                <div class="card card-info card-outline" style="height:450px;margin-right:5px;margin-left:0px;">
+                  <div class="card-header">
+                    <div style="float:left;margin-left:10px">
+                      <h2 class="m-0 text-dark"><i class="fa fa-line-chart"></i> Monthly Presence Activities </h2>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="panel-body" style="width:100%;">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+
+
+
+
+
+
+
+
 
                   <!-- table   -->
 
@@ -239,7 +268,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <h2 class="m-0 text-dark"><i class="fas fa-user-tie"></i><strong> Users </strong></h2>
                           </div>
                           <div style="float:left;margin-left:15px">
-                            <a href="/karyawan/tambah" style="float:left" type="button" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i></i> Add New</a>
+                            <a href="/karyawan/tambah" style="float:left" type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></i> Add New</a>
                           </div>
                           <div style="max-width:400px;margin:auto;float:right">
                             <div class="input-icons">
@@ -259,7 +288,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <th class="js-sort-string">Position</th>
                                   <th>Action</th>
                               </tr>
-                              @foreach ($karyawan as $k)
+                              @foreach ($tot_karyawan as $k)
                               <tr>
 
                                   <td>{{$k->name}}</td>
@@ -268,7 +297,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <td>{{$k->jabatan}}</td>
                                   <td>
                                       <a href="/karyawan/hapus/{{$k->id}}" onclick="return confirm('Are you sure want to delete {{$k->name}} ?')" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
-                                      <a href="/karyawan/edit/{{$k->id}}" type="button" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                      <a href="/karyawan/edit/{{$k->id}}" type="button" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
                                   </td>
                               </tr>
                               @endforeach
@@ -310,6 +339,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
       }
     }
   }
+
+  var month = <?php echo $month; ?>;
+      var terlambat = <?php echo $terlambat; ?>;
+      var ontime = <?php echo $ontime; ?>;
+      var presensi = <?php echo $presensi; ?>;
+      var barChartData = {
+          labels: month,
+          datasets: [{
+              label: 'Terlambat',
+              backgroundColor: "#d0d4d7",
+              borderColor: "#c8ced1",
+              data: terlambat
+          },
+            {
+              label: 'On time',
+              backgroundColor: "#707e8d",
+              borderColor: "#3e5266",
+              data: ontime
+          },
+          {
+              label: 'Presensi',
+              backgroundColor: "#65ccb6",
+              borderColor: "#44c2a8",
+              data: presensi
+          }
+        ]
+      };
+
+      window.onload = function() {
+          var ctx = document.getElementById("canvas").getContext("2d");
+          window.myBar = new Chart(ctx, {
+              type: 'line',
+              data: barChartData,
+              options: {
+                  elements: {
+                      rectangle: {
+                          borderWidth: 1,
+                          // borderColor: '#c1c1c1',
+                          borderSkipped: 'bottom'
+                      }
+                  },
+                  responsive: true,
+                  title: {
+                      display: true,
+                      text: ''
+                  }
+              }
+          });
+      };
 </script>
     <!-- jQuery -->
     @include('Template.script')

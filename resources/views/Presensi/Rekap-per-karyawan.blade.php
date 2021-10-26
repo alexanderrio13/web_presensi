@@ -7,9 +7,57 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Laporan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
+    <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
     @include('Template.head')
 <style>
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout:fixed;
+    /*border:0; */
+    width: 100%;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
+
+  tr:nth-child(even){
+    background-color: #f2f2f2
+  }
+
+  table-container {
+    overflow: auto;
+  }
+
+  #myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 17px;
+  }
+
+  #myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+  }
+
+  #myTable tr {
+  border-bottom: 1px solid #ddd;
+  }
+
+  #myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+  }
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
 
 </style>
 </head>
@@ -66,22 +114,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </div> -->
                             <div class="form-group">
-                                <table class="w3-table-all" border="1" style="  table-layout: fixed;width: 100%;">
-                                    <tr class="w3-hover-cyan">
+                                <table id="myTable" class="table custom-table js-sort-table" border="1">
+                                    <tr style="background:#bab8b8">
 
-                                        <th>Tanggal</th>
+                                        <th class="js-sort-string">Tanggal</th>
                                         <th>Masuk</th>
                                         <th>Pulang</th>
                                         <th>Jumlah Jam Kerja</th>
                                         <th>Status Presensi</th>
                                     </tr>
                                     @foreach ($presensi as $p)
-                                    <tr class="w3-hover-cyan">
+                                    <tr>
 
                                         <td>{{ $p->tgl }}</td>
-                                        <td>{{ $p->jammasuk ?? '-'}}</td>
-                                        <td>{{ $p->jamkeluar ?? '-' }}</td>
-                                        <td>{{ $p->jamkerja ?? '-' }}</td>
+                                        <td>{{ $p->jammasuk ?? '(no data)'}}</td>
+                                        <td>{{ $p->jamkeluar ?? '(no data)' }}</td>
+                                        <td>{{ $p->jamkerja ?? '(no data)' }}</td>
                                         <td>
                                           @if ($p->jammasuk > '08:30:59')
                                           <span class="badge badge-danger">Terlambat</span>
@@ -106,17 +154,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="card-header">Data Lembur</div>
                 <div class="card-body">
                     <div class="form-group">
-                        <table class="w3-table-all" border="1" style="  table-layout: fixed;width: 100%;">
-                            <tr class="w3-hover-cyan">
+                      <table id="myTable" class="table custom-table js-sort-table" border="1">
+                          <tr style="background:#bab8b8">
 
-                                <th>Tanggal</th>
+                                <th class="js-sort-string">Tanggal</th>
                                 <th>Mulai</th>
                                 <th>Selesai</th>
                                 <th>Jumlah Lembur</th>
                                 <th>Pengerjaan</th>
                             </tr>
                             @foreach ($lembur as $l)
-                            <tr class="w3-hover-cyan">
+                            <tr>
 
                                 <td>{{ $l->tgl }}</td>
                                 <td>{{ $l->lemburmasuk }}</td>

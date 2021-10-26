@@ -18,13 +18,12 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <style>
 
-        body {background: linear-gradient(127deg, #0E9AA9, #E1F3FF,#E1F3FF);
-    background-size: 400% 400%;
+        body {background: linear-gradient(127deg, #0E9AA9, #E1F3FF, #E1F3FF);
+    background-size: 800% 800%;
     border-radius: 5px;
-
+    padding: 10px;
 
     -webkit-animation: AnimationName 30s ease infinite;
     -moz-animation: AnimationName 30s ease infinite;
@@ -46,47 +45,32 @@
     50%{background-position:100% 92%}
     100%{background-position:0% 9%}
 }
-        .main {
-          background:transparent;
-          width:100%;
-          height:100%;
-          position:fixed;
-          display:inline-block;
-          margin-right:50px;
+        .centered_left {
+          padding-top: 60px;
+          padding-right: 5px;
 
-        }
-
-        .div_box {
-          width:450px;
-          height:600px;
-          background-color:#E1F3FF;
-          border:1px solid;
-          border-width:2px;
-          border-color:#0E9AA9;
+          padding-left: 5px;
+          display: inline-block;
           border-radius: 25px;
-=         position: fixed;
-          padding-top:50px;
-          margin: auto;
+          position: fixed;
+          top: 0%;
+          left: 20%;
 
+          /* bring your own prefixes */
+          transform: translate(-170%, 30%);
         }
+        .centered_right {
+          padding-top: 50px;
+          padding-right: 5px;
+          padding-bottom: 50px;
+          padding-left: 5px;
+          display: inline-block;
+          position: fixed;
+          top: 0%;
+          left: 20%;
 
-        .div_left {
-          width:37.5%;
-          height:100%;
-          background-color:transparent;
-          float:left;
-
-          /* padding-left: 4%;*/
-          padding-top: 9%;
-
-        }
-        .div_right {
-          width:62.5%;
-          height:90%;
-          background-color:transparent;
-          float:right;
-          margin:auto;
-
+          /* bring your own prefixes */
+          transform: translate(-200%, 30%);
         }
         .child_centered {
           border-radius: 25px;
@@ -113,34 +97,11 @@
         .zoom:hover {
           transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
-
-        @media screen and (max-device-width: 480px) {
-          .div_right {
-            display:none;
-
-          }
-          .main {
-            background:transparent;
-            width:400px;
-            padding-top:75px;
-            padding-left:10px;
-
-
-          }
-
-          .div_box {
-            width:390px;
-            height:540px;
-            margin:0 auto;
-
-          }
-        }
     </style>
 </head>
 <body>
-<div class="main">
-<div class="div_left">
- <div class="div_box">
+<div class="padding" style="background:transparent">
+ <div class="centered_left" style="width:400px;height:550px;background-color:#E1F3FF;left:50%;border:1px solid;border-width:2px; border-color:#0E9AA9">
     <div class="login-box" style="margin:0 auto;">
         <div class="login-logo">
             <!-- <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a> -->
@@ -148,7 +109,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="card" style="border-radius: 25px" >
-            <div class="card-body login-card-body" style="background-color:#E1F3FF;">
+            <div class="card-body login-card-body" style="background-color:#E1F3FF">
                 <p class="login-box-msg">Sign in to start your session</p>
                 @if ($error = $errors->first('password'))
                   <div class="alert alert-danger">
@@ -174,29 +135,33 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <div class="icheck-primary" style="float:right">
-                              <a style="font-family:Poppins;font-size:0.85em;color:gray" href="{{route('forgot-password')}}"><strong>Forgot password?</strong></a>
+                        <div class="col-8">
+                            <div class="icheck-primary">
+
                             </div>
                         </div>
-                    </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                          <a style="font-family:Poppins;font-size:0.85em;color:gray" href="{{route('forgot-password')}}"  target="_blank"><strong>Forget password</strong></a>
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <!-- <input type="button" class="btn btn-default btn-block" onclick="location.href='{{route('registrasi')}}';" value="Register" /> -->
+                                <!-- <button type="submit" class="btn btn-default btn-block">Register</button> -->
 
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
                 </form>
-                <div class="col-4" style="margin:auto;margin-top:10px">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    <!-- <input type="button" class="btn btn-default btn-block" onclick="location.href='{{route('registrasi')}}';" value="Register" /> -->
-                        <!-- <button type="submit" class="btn btn-default btn-block">Register</button> -->
-                </div>
+
             </div>
             <!-- /.login-card-body -->
         </div>
     </div>
     <!-- /.login-box -->
   </div>
-</div>
-  <div class="div_right">
+  <div class="centered_right" style="width:650px;height:1px;background-color:transparent;left:118%;">
 
-    <img src="Rioadi/img/man.png" style="width:110%;height:110%;" class="zoom">
+    <img src="Rioadi/img/man.png" style="width:1000px;height:725px;" class="zoom">
 
  </div>
 </div>

@@ -50,13 +50,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   right: 0;
   top: 10px;
   border-radius: 4px;
-  opacity: 0.4;
+
 
 
   }
 
   .alert.showAlert{
-    opacity: 1;
+    opacity: 0.85;
     pointer-events: auto;
   }
   .alert.show{
@@ -90,7 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       transform: translateX(-10%);
     }
     100%{
-      transform: translateX(400%);
+      transform: translateX(0%);
     }
   }
   .alert .fa-exclamation-circle{
@@ -181,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="alert alert-success show hide showAlert show_slide" style="border-left: 8px solid green;">
                           <button type="button" class="close" data-dismiss="alert"><span class="fas fa-times"></span></button>
                           <span class="fas fa-check-circle"></span>
-                          <span style="padding: 0 20px;font-size: 18px;color: white">{{ $message }}</span>
+                          <span style="padding: 0 20px;font-size: 18px;color: green">{{ $message }}</span>
                         </div>
                         @endif
                         <div class="card-body">

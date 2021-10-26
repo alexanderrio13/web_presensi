@@ -122,58 +122,68 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="container" style="width:500px;">
-              @foreach ($users as $user)
-              <form action="/karyawan/update" method="post">
-                {{ csrf_field() }}
-                <input type="hidden" name="id" value="{{ $user->id }}">
-              <div class="row">
-                <div class="col-25">
-                  <label for="fname">Name</label>
-                </div>
-                <div class="col-75">
-                  <input type="text" class="form-control" name="name" maxlength="19" value="{{ $user->name }}" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="lname">Email</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" class="form-control" name="email" maxlength="19" value="{{ $user->email }}" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="fname">Password</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" class="form-control" name="password" maxlength="19" value="{{ $user->password }}" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="lname">Posisiton</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" class="form-control" name="jabatan" maxlength="19" value="{{ $user->jabatan }}" required>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input name="level" type="hidden" value="karyawan">
 
-              </div>
-              <div class="form-group" style="position:relative;">
-                <div style="float:right;margin-right: 30px;">
-                  <a href="/admin-dashboard" class="btn btn-warning">Cancel</a>
+            <div class="container card card-primary card-outline" style="width:600px;">
+                <div class="card-header">
+                    <h5 class="m-0">Edit User</h5>
                 </div>
-                <div style="float:right;margin-right: 10px;">
-                  <button type="submit"  class="btn btn-primary btn-block">Save</button>
+                <div class="card-body">
+                  <div class="container" style="width:500px;">
+                    @foreach ($users as $user)
+                    <form action="/karyawan/update" method="post">
+                      {{ csrf_field() }}
+                      <input type="hidden" name="id" value="{{ $user->id }}">
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="fname">Name</label>
+                      </div>
+                      <div class="col-75">
+                        <input type="text" class="form-control" name="name" maxlength="19" value="{{ $user->name }}" required>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="lname">Email</label>
+                      </div>
+                      <div class="col-75">
+                          <input type="text" class="form-control" name="email" maxlength="19" value="{{ $user->email }}" required>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="fname">Password</label>
+                      </div>
+                      <div class="col-75">
+                          <input type="text" class="form-control" name="password" maxlength="19" value="{{ $user->password }}" required>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="lname">Posisiton</label>
+                      </div>
+                      <div class="col-75">
+                          <input type="text" class="form-control" name="jabatan" maxlength="19" value="{{ $user->jabatan }}" required>
+                      </div>
+                    </div>
+                    <div class="input-group mb-3">
+                      <input name="level" type="hidden" value="karyawan">
+
+                    </div>
+                    <div class="form-group" style="position:relative;">
+                      <div style="float:right;margin-right: 30px;">
+                        <a href="/admin-dashboard" class="btn btn-warning">Cancel</a>
+                      </div>
+                      <div style="float:right;margin-right: 10px;">
+                        <button type="submit"  class="btn btn-primary btn-block">Save</button>
+                      </div>
+                    </div>
+                    </form>
+                    @endforeach
+                  </div>
+
                 </div>
-              </div>
-              </form>
-              @endforeach
             </div>
+
 
             <!-- /.content -->
         </div>

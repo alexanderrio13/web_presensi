@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Laporan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
     <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
     <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
@@ -19,6 +19,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 <style>
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
+
+  tr:nth-child(even){background-color: #f2f2f2}
   * {
   box-sizing: border-box;
   }
@@ -39,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   border-collapse: collapse;
   width: 100%;
   border: 1px solid #ddd;
-  font-size: 18px;
+  font-size: 17px;
   }
 
   #myTable th, #myTable td {
@@ -53,6 +71,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
+  }
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
+  table-container {
+    overflow: auto;
   }
 </style>
 <body class="hold-transition sidebar-mini">
@@ -118,23 +142,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                           </form>
                             <div class="form-group">
-                                <table class="w3-table-all js-sort-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
-                                    <tr class="w3-hover-cyan">
-                                        <th class="js-sort-string">Karyawan</th>
-                                        <th class="js-sort-date">Tanggal</th>
-                                        <th>Masuk</th>
-                                        <th>Pulang</th>
-                                        <th>Jumlah Jam Kerja</th>
-                                        <th>Status Presensi</th>
+                                <table class="table custom-table js-sort-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
+                                    <tr style="background:#bab8b8">
+                                        <th scope="col" class="js-sort-string">Karyawan</th>
+                                        <th scope="col"class="js-sort-date">Tanggal</th>
+                                        <th scope="col">Masuk</th>
+                                        <th scope="col">Pulang</th>
+                                        <th scope="col">Jumlah Jam Kerja</th>
+                                        <th scope="col">Status Presensi</th>
 
                                     </tr>
                                     @foreach ($presensi as $item)
-                                    <tr class="w3-hover-cyan">
-                                        <td>{{ $item->user->name ?? $item->user_id }}</td>
+                                    <tr>
+                                        <td>{{ $item->user->name ?? '(deleted user)' }}</td>
                                         <td>{{ $item->tgl }}</td>
-                                        <td>{{ $item->jammasuk }}</td>
-                                        <td>{{ $item->jamkeluar }}</td>
-                                        <td>{{ $item->jamkerja }}</td>
+                                        <td>{{ $item->jammasuk ?? '(no data)' }}</td>
+                                        <td>{{ $item->jamkeluar ?? '(no data)' }}</td>
+                                        <td>{{ $item->jamkerja ?? '(no data)' }}</td>
                                         <td>
                                           @if ($item->jammasuk > '08:30:59')
                                           <span class="badge badge-danger">Terlambat</span>

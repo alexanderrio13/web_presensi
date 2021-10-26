@@ -53,6 +53,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         display:inline;
       }
 
+      aside[data-visible="true"] {
+  display: flex;
+  flex-direction: column;
+}
+
     </style>
 
 </head>
@@ -127,16 +132,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <input type=button class="btn btn-info" value="Take Picture" onClick="take_snapshot()">
                                     </div>
                                     <input type="hidden" name="image_in" class="image-tag">
-
-
                                   </div>
                                   <div id="hide" class="hidden-div">
                                     <div id="results" class="part1"></div>
                                     <div id="left">
-
-                                          <button type="submit" class="btn btn-info"><i class="fas fa-check"></i> Submit</button>
+                                      <button type="submit" class="btn btn-info"><i class="fas fa-check"></i> Submit</button>
                                     </div>
-                                      <a href="/laman-presensi/masuk" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> Retake</a>
+                                    <a href="/laman-presensi/masuk" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> Retake</a>
                                   </div>
                                 </center>
                               </form>
@@ -151,7 +153,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
+        <aside class="control-sidebar control-sidebar-dark" data-visible="true">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
                 <h5>Today's Activity</h5>

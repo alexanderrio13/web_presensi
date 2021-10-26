@@ -105,7 +105,7 @@
     <div class="login-box" style="margin:0 auto;">
         <div class="login-logo">
             <!-- <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a> -->
-              <img src="/Rioadi/img/logo login page.png" style="height:100%;width:60%">
+              <img src="/Rioadi/img/logo-login-page.png" style="height:100%;width:60%">
         </div>
         <!-- /.login-logo -->
         <div class="card" style="border-radius: 25px" >

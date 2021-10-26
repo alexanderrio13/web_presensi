@@ -122,51 +122,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="container" style="width:500px;">
-              <form action="/karyawan/store" method="post">
-                {{ csrf_field() }}
-              <div class="row">
-                <div class="col-25">
-                  <label for="fname">Name</label>
-                </div>
-                <div class="col-75">
-                  <input type="text" class="form-control" name="name" maxlength="19" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="lname">Email</label>
-                </div>
-                <div class="col-75">
-                  <input type="email" class="form-control" name="email" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="fname">Password</label>
-                </div>
-                <div class="col-75">
-                  <input type="password" class="form-control" name="password" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="lname">Posisiton</label>
-                </div>
-                <div class="col-75">
-                  <input type="jabatan" class="form-control" name="jabatan" required>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input name="level" type="hidden" value="karyawan">
 
-              </div>
-              <div class="col-4">
-                  <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <div class="container card card-primary card-outline" style="width:600px;">
+                <div class="card-header">
+                    <h5 class="m-0">Add New User</h5>
+                </div>
+                <div class="card-body">
+                  <div class="container" style="width:500px;">
+                    <form action="/karyawan/store" method="post">
+                      {{ csrf_field() }}
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="fname">Name</label>
+                      </div>
+                      <div class="col-75">
+                        <input type="text" class="form-control" name="name" maxlength="19" required>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="lname">Email</label>
+                      </div>
+                      <div class="col-75">
+                        <input type="email" class="form-control" name="email" required>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="fname">Password</label>
+                      </div>
+                      <div class="col-75">
+                        <input type="password" class="form-control" name="password" required>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-25">
+                        <label for="lname">Posisiton</label>
+                      </div>
+                      <div class="col-75">
+                        <input type="jabatan" class="form-control" name="jabatan" required>
+                      </div>
+                    </div>
+                    <div class="input-group mb-3">
+                      <input name="level" type="hidden" value="karyawan">
 
-              </div>
-              </form>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    </div>
+                    </form>
+                  </div>
+                </div>
             </div>
+
+
 
             <!-- /.content -->
         </div>

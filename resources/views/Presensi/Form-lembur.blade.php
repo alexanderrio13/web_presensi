@@ -122,77 +122,87 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="container" style="width:500px;">
-              <form action="/lembur/store" method="post">
-                {{ csrf_field() }}
-              <div class="row">
-                <div class="col-25">
-                  <label for="fname">Tugas Yang Dikerjakan</label>
-                </div>
-                <div class="col-75">
-                  <textarea class="form-control" name="desc_lembur" rows="10" cols="30" required></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="lname">Tanggal</label>
-                </div>
-                <div class="col-75">
-                  <input type="date" class="form-control" name="tgl" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="lname">Mulai</label>
-                </div>
-                <div class="col-75">
-                  <input type="time" class="form-control" name="lemburmasuk" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="fname">Selesai</label>
-                </div>
-                <div class="col-75">
-                  <input type="time" class="form-control" name="lemburkeluar" required>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="lname">Mengetahui SPV</label>
-                </div>
-                <div class="col-75">
-                  <p>
-                    <input type="radio" name="statuslembur" value="yes" checked>Yes</input>
-                    </p>
-                    <p>
-                    <input type="radio" name="statuslembur" value="no">No</input>
-                    </p>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input name="user_id" type="hidden" value={{$user_id}}>
 
-              </div>
-              <div class="col-4">
-                  <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <div class="container card card-primary card-outline" style="width:600px;">
+                <div class="card-header">
+                    <h5 class="m-0">Isi Form Lembur</h5>
+                </div>
+                <div class="card-body">
+                    <div  style="width:500px;margin:auto">
+                      <form action="/lembur/store" method="post">
+                        {{ csrf_field() }}
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="fname">Tugas Yang Dikerjakan</label>
+                        </div>
+                        <div class="col-75">
+                          <textarea class="form-control" name="desc_lembur" rows="10" cols="30" required></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="lname">Tanggal</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="date" class="form-control" name="tgl" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="lname">Mulai</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="time" class="form-control" name="lemburmasuk" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="fname">Selesai</label>
+                        </div>
+                        <div class="col-75">
+                          <input type="time" class="form-control" name="lemburkeluar" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-25">
+                          <label for="lname">Mengetahui SPV</label>
+                        </div>
+                        <div class="col-75">
+                          <p>
+                            <input type="radio" name="statuslembur" value="yes" checked>Yes</input>
+                            </p>
+                            <p>
+                            <input type="radio" name="statuslembur" value="no">No</input>
+                            </p>
+                        </div>
+                      </div>
+                      <div class="input-group mb-3">
+                        <input name="user_id" type="hidden" value={{$user_id}}>
 
-              </div>
-              </form>
+                      </div>
+                      <div class="col-4">
+                          <button type="submit" class="btn btn-primary btn-block">Save</button>
+
+                      </div>
+                      </form>
+                    </div>
+                </div>
             </div>
+
+
 
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
+        <!-- <aside class="control-sidebar control-sidebar-dark"> -->
             <!-- Control sidebar content goes here -->
-            <div class="p-3">
+            <!-- <div class="p-3">
                 <h5>Title</h5>
                 <p>Sidebar content</p>
             </div>
-        </aside>
+        </aside> -->
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->

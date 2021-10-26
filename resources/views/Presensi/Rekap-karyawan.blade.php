@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Laporan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
@@ -15,6 +15,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 <style>
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
+
+  tr:nth-child(even){background-color: #f2f2f2}
+
+
   * {
   box-sizing: border-box;
   }
@@ -35,7 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   border-collapse: collapse;
   width: 100%;
   border: 1px solid #ddd;
-  font-size: 18px;
+  font-size: 17px;
   }
 
   #myTable th, #myTable td {
@@ -49,6 +69,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
+  }
+  .table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: #eeeeea;
+  }
+
+  table-container {
+    overflow: auto;
   }
 </style>
 
@@ -116,8 +143,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                           </form>
                             <div class="form-group">
-                                <table id="myTable" class="w3-table-all" border="1" style="  table-layout: fixed;width: 100%;">
-                                    <tr class="w3-hover-cyan">
+                                  <table class="table custom-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
+                                    <tr style="background:#bab8b8">
                                         <th>Karyawan</th>
                                         <th>Tanggal</th>
                                         <th>Masuk</th>
@@ -126,12 +153,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th>Status Presensi</th>
                                     </tr>
                                     @foreach ($presensi as $item)
-                                    <tr class="w3-hover-cyan">
+                                    <tr>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->tgl }}</td>
-                                        <td>{{ $item->jammasuk }}</td>
-                                        <td>{{ $item->jamkeluar }}</td>
-                                        <td>{{ $item->jamkerja }}</td>
+                                        <td>{{ $item->jammasuk ?? '(no data)' }}</td>
+                                        <td>{{ $item->jamkeluar ?? '(no data)'}}</td>
+                                        <td>{{ $item->jamkerja ?? '(no data)'}}</td>
                                         <td>
                                           @if ($item->jammasuk > '08:30:59')
                                           <span class="badge badge-danger">Terlambat</span>
@@ -191,7 +218,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       //   }
     }
     </script>
-    <!-- jQuery -->
-filter-result
+    <!-- jQuery --> 
 </body>
 </html>
