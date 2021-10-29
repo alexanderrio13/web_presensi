@@ -98,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Main content -->
             <div class="content">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" style="margin-left: 10px;margin-right: 10px;">
                     <div class="card card-info card-outline" >
                         <div class="card-header" style="margin:0 auto;">
                           <p id="GFG_UP"

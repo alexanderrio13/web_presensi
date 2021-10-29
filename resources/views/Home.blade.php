@@ -6,6 +6,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
     <title>Go-Blog | Karyawan Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     @include('Template.head')
 </head>
 <body class="hold-transition sidebar-mini">

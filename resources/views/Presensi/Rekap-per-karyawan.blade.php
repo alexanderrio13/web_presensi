@@ -5,59 +5,93 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
-    <title>Go-Blog | Laporan</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go-Blog | History</title>
+    <!-- js buat sidebar -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <!-- data tables pagination -->
+    <link rel="Stylesheet" src="https://code.jquery.com/jquery-1.12.3.js">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <!-- chart src -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
     <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
     <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
+
+
+
     @include('Template.head')
-<style>
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout:fixed;
-    /*border:0; */
-    width: 100%;
-  }
 
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
-
-  .table tbody tr:hover td, .table tbody tr:hover th {
-  background-color: #eeeeea;
-  }
-
-  tr:nth-child(even){
-    background-color: #f2f2f2
-  }
-
-  table-container {
-    overflow: auto;
-  }
-
-  #myTable {
+    <style>
+table {
   border-collapse: collapse;
+  border-spacing: 0;
+  table-layout:fixed;
+  border:0;
   width: 100%;
   border: 1px solid #ddd;
-  font-size: 17px;
-  }
+}
 
-  #myTable th, #myTable td {
+th, td {
   text-align: left;
-  padding: 12px;
-  }
+  padding: 8px;
+}
 
-  #myTable tr {
-  border-bottom: 1px solid #ddd;
-  }
+.table tbody tr:hover td, .table tbody tr:hover th {
+background-color: #eeeeea;
+}
 
-  #myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-  }
-  .table tbody tr:hover td, .table tbody tr:hover th {
-  background-color: #eeeeea;
-  }
+tr:nth-child(even){
+  background-color: #f2f2f2
+}
+
+.input-icons i {
+       position: absolute;
+   }
+
+   .input-icons {
+       width: 100%;
+       margin-bottom: 10px;
+   }
+
+   .icon {
+       padding: 10px;
+       min-width: 40px;
+   }
+
+   .input-field {
+       width: 100%;
+       padding: 10px;
+       text-align: left;
+   }
+
+ .table tbody tr:hover td, .table tbody tr:hover th {
+ background-color: #eeeeea;
+ }
+
+ table-container {
+   overflow: auto;
+ }
+
+ .custom-width{
+   width:100%;
+ }
+ @media screen and (max-width: 1024px) {
+   .custom-width{
+     width:150%;
+   }
+ }
+
 
 </style>
 </head>
@@ -94,8 +128,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="content">
-                <div class="row justify-content-center">
+              <div style="overflow-x:auto;" class="content able-responsive custom-table-responsive">
+                <div class="custom-width row justify-content-center">
                     <div class="card card-info card-outline" style="margin-right:10px;margin-left:10px">
                         <div class="card-header">Data Presensi</div>
                         <div class="card-body">
@@ -113,8 +147,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Lihat <i class="fas fa-print"></i>
                                 </a>
                             </div> -->
-                            <div class="form-group">
-                                <table id="myTable" class="table custom-table js-sort-table" border="1">
+                            <div class="form-group" >
+                                <table id="MyTable" class="table table-bordered custom-table js-sort-table" cellspacing="0">
+                                  <thead>
                                     <tr style="background:#bab8b8">
 
                                         <th class="js-sort-string">Tanggal</th>
@@ -123,22 +158,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th>Jumlah Jam Kerja</th>
                                         <th>Status Presensi</th>
                                     </tr>
-                                    @foreach ($presensi as $p)
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($presensi as $item)
                                     <tr>
-
-                                        <td>{{ $p->tgl }}</td>
-                                        <td>{{ $p->jammasuk ?? '(no data)'}}</td>
-                                        <td>{{ $p->jamkeluar ?? '(no data)' }}</td>
-                                        <td>{{ $p->jamkerja ?? '(no data)' }}</td>
+                                        <td>{{ $item->tgl }}</td>
                                         <td>
-                                          @if ($p->jammasuk > '08:30:59')
+                                          @if ($item->jammasuk > '08:30:59')
                                           <span class="badge badge-danger">Terlambat</span>
                                           @else
                                           <span class="badge badge-success">On Time</span>
                                           @endif
+                                          <br>
+                                          {{ $item->jammasuk }}
+                                        </td>
+                                        <td>@if ($item->jamkeluar)
+                                          {{ $item->jamkeluar}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>@if ($item->jamkerja)
+                                          {{ $item->jamkerja}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>
+                                          @if ($item->jammasuk < '08:30:59' && $item->jamkeluar > '17:30:00')
+                                          <span class="badge badge-success">Memenuhi</span>
+                                          @else
+                                          <span class="badge badge-warning">Tidak Memenuhi</span>
+                                          @endif
                                         </td>
                                     </tr>
                                     @endforeach
+                                  </tbody>
                                 </table>
 
                             </div>
@@ -149,12 +204,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.row -->
 
             <br>
-            <div class="row justify-content-center">
+            <div class="custom-width row justify-content-center">
             <div class="card card-info card-outline" style="margin-right:10px;margin-left:10px">
                 <div class="card-header">Data Lembur</div>
                 <div class="card-body">
                     <div class="form-group">
-                      <table id="myTable" class="table custom-table js-sort-table" border="1">
+                      <table id="MyTable2" class="table table-bordered custom-table js-sort-table" cellspacing="0">
+                        <thead>
                           <tr style="background:#bab8b8">
 
                                 <th class="js-sort-string">Tanggal</th>
@@ -163,6 +219,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <th>Jumlah Lembur</th>
                                 <th>Pengerjaan</th>
                             </tr>
+                          </thead>
+                          <tbody>
                             @foreach ($lembur as $l)
                             <tr>
 
@@ -173,6 +231,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <td>{{ $l->desc_lembur }}</td>
                             </tr>
                             @endforeach
+                          </tbody>
                         </table>
 
                     </div>
@@ -181,10 +240,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             </div>
           </div>
-
-          </div>
           <!-- content -->
-        </div>
+          </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
@@ -203,6 +261,57 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
+    <script>
+
+      $(document).ready(function() {
+        $('#MyTable').DataTable( {
+              initComplete: function () {
+                  this.api().columns().every( function () {
+                      var column = this;
+                      var select = $('<select><option value=""></option></select>')
+                          .appendTo( $(column.footer()).empty() )
+                          .on( 'change', function () {
+                              var val = $.fn.dataTable.util.escapeRegex(
+                                  $(this).val()
+                              );
+                      //to select and search from grid
+                              column
+                                  .search( val ? '^'+val+'$' : '', true, false )
+                                  .draw();
+                          } );
+
+                      column.data().unique().sort().each( function ( d, j ) {
+                          select.append( '<option value="'+d+'">'+d+'</option>' )
+                      } );
+                  } );
+              }
+          } );
+      } );
+      $(document).ready(function() {
+        $('#MyTable2').DataTable( {
+              initComplete: function () {
+                  this.api().columns().every( function () {
+                      var column = this;
+                      var select = $('<select><option value=""></option></select>')
+                          .appendTo( $(column.footer()).empty() )
+                          .on( 'change', function () {
+                              var val = $.fn.dataTable.util.escapeRegex(
+                                  $(this).val()
+                              );
+                      //to select and search from grid
+                              column
+                                  .search( val ? '^'+val+'$' : '', true, false )
+                                  .draw();
+                          } );
+
+                      column.data().unique().sort().each( function ( d, j ) {
+                          select.append( '<option value="'+d+'">'+d+'</option>' )
+                      } );
+                  } );
+              }
+          } );
+      } );
+      </script>
 
     <!-- jQuery -->
     @include('Template.script')

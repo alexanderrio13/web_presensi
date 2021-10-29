@@ -52,10 +52,10 @@
               </div>
               <div class="info">
                   <a id="p" class="d-block">
-                    GO-BLOG
+                    ADMIN
                   </a>
                   <a id="p1" class="d-block">
-                    DEVELOPER
+                    DASHBOARD
                   </a>
               </div>
               @endif
@@ -118,7 +118,7 @@
                     </a>
                   </li>
                 @endif
-                @if (auth()->user()->level == "admin")
+                @if (auth()->user()->level == "administrator")
                 <li class="nav-item">
                     <a href="{{ route('dashboard-admin') }}" class="nav-link">
                         <i class="nav-icon fa fa-home"></i>
@@ -128,7 +128,7 @@
                     </a>
                 </li>
                 @endif
-                @if (auth()->user()->level == "admin")
+                @if (auth()->user()->level == "administrator")
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fa fa-table"></i>

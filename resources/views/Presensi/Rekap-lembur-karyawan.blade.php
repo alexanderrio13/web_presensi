@@ -5,104 +5,66 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Go-Blog | Rekap Lembur</title>
-        <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
 
+        <!-- Font Awesome -->
+        <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 
-    <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
-    <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
+        <!-- data tables pagination -->
+        <link rel="Stylesheet" src="https://code.jquery.com/jquery-1.12.3.js">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <!-- Custom Theme Style -->
+        <link href="../build/css/custom.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="AdminLte/dist/fonts/icomoon/style.css">
+        <link rel="stylesheet" href="AdminLte/dist/css/owl.carousel.min.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="AdminLte/dist/css/bootstrap.min.css">
+        <!-- chart src -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
+        <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+        <script src="AdminLte/dist/js/main.js"></script>
     @include('Template.head')
-<style>
 
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-  }
+    <style>
 
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
-
-  .table tbody tr:hover td, .table tbody tr:hover th {
-  background-color: #eeeeea;
-  }
-
-  tr:nth-child(even){
-    background-color: #f2f2f2
-  }
-
-  * {
-  box-sizing: border-box;
-  }
-
-  .input-icons i {
-         position: absolute;
-     }
-
-     .input-icons {
-         width: 100%;
-         margin-bottom: 10px;
-     }
-
-     .icon {
-         padding: 10px;
-         min-width: 40px;
-     }
-
-     .input-field {
-         width: 100%;
-         padding: 10px;
-         text-align: left;
-     }
-
-  #myInput {
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  margin-bottom: 12px;
-  float:right;
-  text-shadow: 0 0 1px white;
-  height: 40px;
-  }
-
-  #myTable {
+table {
   border-collapse: collapse;
+  border-spacing: 0;
+  /* table-layout:fixed;
+  border:0; */
   width: 100%;
   border: 1px solid #ddd;
-  font-size: 17px;
-  }
+}
 
-  #myTable th, #myTable td {
+th, td {
   text-align: left;
-  padding: 12px;
-  }
+  padding: 8px;
+}
 
-  #myTable tr {
-  border-bottom: 1px solid #ddd;
-  }
+.table tbody tr:hover td, .table tbody tr:hover th {
+background-color: #eeeeea;
+}
 
-  #myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-  }
-  .table tbody tr:hover td, .table tbody tr:hover th {
-  background-color: #eeeeea;
-  }
+tr:nth-child(even){
+  background-color: #f2f2f2
+}
 
-  table-container {
-    overflow: auto;
-  }
+ table-container {
+   overflow: auto;
+ }
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -144,25 +106,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="card-header">Lihat Data</div>
                         <div class="card-body">
                           <div class="form-group">
-                            <div style="max-width:400px;margin:auto;float:right">
+                            <!-- <div style="max-width:400px;margin:auto;float:right">
                               <div class="input-icons">
                                 <i class="fas fa-search icon"></i>
                                 <input type="text" id="myInput" class="input-field" onkeyup="myFunction()" placeholder="Search" title="Type in a name">
                               </div>
-                            </div>
-                            <table id="myTable" class="table custom-table js-sort-table" border="1" style="  table-layout: fixed;width: 100%;">
+                            </div> -->
+                            <table id="MyTable" class="table table-bordered custom-table js-sort-table" cellspacing="0">
+                              <thead>
                                 <tr style="background:#bab8b8">
-                                  <th class="js-sort-string">Nama</th>
-                                  <th>Tanggal</th>
-                                  <th>Mulai</th>
-                                  <th>Selesai</th>
-                                  <th>Jumlah Lembur</th>
-                                  <th>Mengetahui SPV</th>
-                                  <th>Pengerjaan</th>
-                                </tr>
+                                    <th class="js-sort-string">Nama</th>
+                                    <th>Tanggal</th>
+                                    <th>Mulai</th>
+                                    <th>Selesai</th>
+                                    <th>Jumlah Lembur</th>
+                                    <th>Mengetahui SPV</th>
+                                    <th>Pengerjaan</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
                                 @foreach ($lembur as $l)
                                 <tr>
-                                  <td>{{ $l->user->name }}
+                                  <td>{{ $l->user->name }}</td>
                                   <td>{{ $l->tgl }}</td>
                                   <td>{{ $l->lemburmasuk }}</td>
                                   <td>{{ $l->lemburkeluar }}</td>
@@ -171,6 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <td>{{ $l->desc_lembur }}</td>
                                 </tr>
                                 @endforeach
+                              </tbody>
                             </table>
                           </div>
                         </div><!-- /.container-fluid -->
@@ -198,31 +164,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- REQUIRED SCRIPTS -->
     <script>
-    $(document).ready(function () {
-      $('select').selectize({
-          sortField: 'text'
-      });
-    });
+    $(document).ready(function() {
+      $('#MyTable').DataTable( {
+            initComplete: function () {
+                this.api().columns().every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                    //to select and search from grid
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
 
-    function myFunction() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-    }
-
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            }
+        } );
+    } );
 
     </script>
     <!-- jQuery -->

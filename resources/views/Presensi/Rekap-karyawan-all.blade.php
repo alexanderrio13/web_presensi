@@ -5,10 +5,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
-    <title>Go-Blog | Laporan</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go-Blog | Laporan</title>
 
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 
+    <!-- data tables pagination -->
+    <link rel="Stylesheet" src="https://code.jquery.com/jquery-1.12.3.js">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="AdminLte/dist/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="AdminLte/dist/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="AdminLte/dist/css/bootstrap.min.css">
+    <script src="AdminLte/dist/js/main.js"></script>
     <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
     <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
 
@@ -23,6 +46,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   table {
     border-collapse: collapse;
     border-spacing: 0;
+    table-layout:fixed;
+    /*border:0; */
     width: 100%;
     border: 1px solid #ddd;
   }
@@ -36,48 +61,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
   background-color: #eeeeea;
   }
 
-  tr:nth-child(even){background-color: #f2f2f2}
-  * {
-  box-sizing: border-box;
+  tr:nth-child(even){
+    background-color: #f2f2f2
   }
 
-  #myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 20%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-  float:right;
-  }
+  .input-icons i {
+         position: absolute;
+     }
 
-  #myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 17px;
-  }
+     .input-icons {
+         width: 100%;
+         margin-bottom: 10px;
+     }
 
-  #myTable th, #myTable td {
-  text-align: left;
-  padding: 12px;
-  }
+     .icon {
+         padding: 10px;
+         min-width: 40px;
+     }
 
-  #myTable tr {
-  border-bottom: 1px solid #ddd;
-  }
+     .input-field {
+         width: 100%;
+         padding: 10px;
+         text-align: left;
+     }
 
-  #myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-  }
-  .table tbody tr:hover td, .table tbody tr:hover th {
-  background-color: #eeeeea;
-  }
-  table-container {
-    overflow: auto;
-  }
+   table-container {
+     overflow: auto;
+   }
 </style>
 <body class="hold-transition sidebar-mini">
 
@@ -121,7 +131,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <form action="{{route('filter-result-all')}}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
-                               <select id="select-state" required="required" class="form-control" name="user_id" placeholder="Select user..." onchange="testValue(this);">
+                               <select required="required" class="form-control" name="user_id" placeholder="Select user..." onchange="testValue(this);">
                                  @foreach ($users as $user )
                                      <option></option>
                                      <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -141,8 +151,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
                             </div>
                           </form>
-                            <div class="form-group">
-                                <table class="table custom-table js-sort-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
+                            <div <div style="overflow-x:auto;" class="table-responsive custom-table-responsive">
+                                <table id="MyTable" class="table table-bordered custom-table js-sort-table" cellspacing="0" >
+                                  <thead>
                                     <tr style="background:#bab8b8">
                                         <th scope="col" class="js-sort-string">Karyawan</th>
                                         <th scope="col"class="js-sort-date">Tanggal</th>
@@ -152,22 +163,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th scope="col">Status Presensi</th>
 
                                     </tr>
+                                  </thead>
+                                  <tbody>
                                     @foreach ($presensi as $item)
                                     <tr>
                                         <td>{{ $item->user->name ?? '(deleted user)' }}</td>
                                         <td>{{ $item->tgl }}</td>
-                                        <td>{{ $item->jammasuk ?? '(no data)' }}</td>
-                                        <td>{{ $item->jamkeluar ?? '(no data)' }}</td>
-                                        <td>{{ $item->jamkerja ?? '(no data)' }}</td>
                                         <td>
                                           @if ($item->jammasuk > '08:30:59')
                                           <span class="badge badge-danger">Terlambat</span>
                                           @else
                                           <span class="badge badge-success">On Time</span>
                                           @endif
+                                          <br>
+                                          {{ $item->jammasuk }}
+                                        </td>
+                                        <td>@if ($item->jamkeluar)
+                                          {{ $item->jamkeluar}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>@if ($item->jamkerja)
+                                          {{ $item->jamkerja}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>
+                                          @if ($item->jammasuk < '08:30:59' && $item->jamkeluar > '17:30:00')
+                                          <span class="badge badge-success">Memenuhi</span>
+                                          @else
+                                          <span class="badge badge-warning">Tidak Memenuhi</span>
+                                          @endif
                                         </td>
                                     </tr>
                                     @endforeach
+                                  </tbody>
                                 </table>
 
                             </div>
@@ -218,8 +250,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
          window.open('/filter-data','_self');
         }
     }
+
+    $(document).ready(function() {
+      $('#MyTable').DataTable( {
+            initComplete: function () {
+                this.api().columns().every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                    //to select and search from grid
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            }
+        } );
+    } );
     </script>
     <!-- jQuery -->
-
+    @include('Template.script')
 </body>
 </html>

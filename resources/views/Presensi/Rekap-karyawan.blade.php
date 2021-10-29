@@ -11,6 +11,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
+    <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
     @include('Template.head')
 
 </head>
@@ -143,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                           </form>
                             <div class="form-group">
-                                  <table class="table custom-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
+                                  <table class="table custom-table js-sort-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
                                     <tr style="background:#bab8b8">
                                         <th>Karyawan</th>
                                         <th>Tanggal</th>
@@ -156,14 +158,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <tr>
                                         <td>{{ $item->user->name }}</td>
                                         <td>{{ $item->tgl }}</td>
-                                        <td>{{ $item->jammasuk ?? '(no data)' }}</td>
-                                        <td>{{ $item->jamkeluar ?? '(no data)'}}</td>
-                                        <td>{{ $item->jamkerja ?? '(no data)'}}</td>
                                         <td>
                                           @if ($item->jammasuk > '08:30:59')
                                           <span class="badge badge-danger">Terlambat</span>
                                           @else
                                           <span class="badge badge-success">On Time</span>
+                                          @endif
+                                          <br>
+                                          {{ $item->jammasuk }}
+                                        </td>
+                                        <td>@if ($item->jamkeluar)
+                                          {{ $item->jamkeluar}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>@if ($item->jamkerja)
+                                          {{ $item->jamkerja}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>
+                                          @if ($item->jammasuk < '08:30:59' && $item->jamkeluar > '17:30:00')
+                                          <span class="badge badge-success">Memenuhi</span>
+                                          @else
+                                          <span class="badge badge-warning">Tidak Memenuhi</span>
                                           @endif
                                         </td>
                                     </tr>
@@ -218,6 +238,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       //   }
     }
     </script>
-    <!-- jQuery --> 
+    <!-- jQuery -->
+    @include('Template.script')
 </body>
 </html>

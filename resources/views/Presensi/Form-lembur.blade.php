@@ -11,18 +11,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Go-Blog | Admin Dashboard</title>
+    <!-- js buat sidebar -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!-- Bootstrap -->
-    <!-- <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
     @include('Template.head')
 
     <style>
@@ -81,14 +72,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
       display: table;
       clear: both;
     }
+    .custom-width{
+      width:50%;
+    }
 
     /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 1024px) {
       .col-25, .col-75, input[type=submit] {
         width: 100%;
         margin-top: 0;
       }
+      .custom-width{
+        width:90%;
+      }
     }
+
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -123,12 +121,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Main content -->
 
-            <div class="container card card-primary card-outline" style="width:600px;">
+            <div class="custom-width container card card-primary card-outline">
                 <div class="card-header">
                     <h5 class="m-0">Isi Form Lembur</h5>
                 </div>
                 <div class="card-body">
-                    <div  style="width:500px;margin:auto">
+                    <div  style="width:100%;margin:auto">
                       <form action="/lembur/store" method="post">
                         {{ csrf_field() }}
                       <div class="row">

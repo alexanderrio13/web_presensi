@@ -6,6 +6,9 @@
     <title>Go-Blog | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('AdminLte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -28,7 +31,7 @@
 
     -webkit-animation: AnimationName 30s ease infinite;
     -moz-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
+    animation: AnimationName 25s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
@@ -53,6 +56,8 @@
           position:fixed;
           display:inline-block;
           margin-right:50px;
+          font-family: Poppins;
+          font-size:0.9em;
 
         }
 
@@ -63,9 +68,9 @@
           border:1px solid;
           border-width:2px;
           border-color:#0E9AA9;
-          border-radius: 25px;
+          border-radius: 40px;
 =         position: fixed;
-          padding-top:50px;
+          padding-top:12.5%;
           margin: auto;
 
         }
@@ -114,7 +119,7 @@
           transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
 
-        @media screen and (max-device-width: 480px) {
+        @media screen and (max-width: 1024px) {
           .div_right {
             display:none;
 
@@ -135,6 +140,11 @@
 
           }
         }
+        .border1 {
+          border-top-left-radius: 15px;
+          border-bottom-left-radius: 15px;
+        }
+
     </style>
 </head>
 <body>
@@ -144,49 +154,52 @@
     <div class="login-box" style="margin:0 auto;">
         <div class="login-logo">
             <!-- <a href="https://adinegoro05.wordpress.com/"  target="_blank"><b>Go-BLOG</b> Dev</a> -->
-              <img src="/Rioadi/img/logo-login-page.png" style="height:100%;width:60%">
+              <img src="/Rioadi/img/logo-login-page.png" style="height:65%;width:65%">
         </div>
         <!-- /.login-logo -->
-        <div class="card" style="border-radius: 25px" >
+        <div class="" style="border-radius: 25px" >
             <div class="card-body login-card-body" style="background-color:#E1F3FF;">
+              @if ($error = $errors->first('password'))
+              <div class="alert alert-danger alert-dismissible show" style="background: rgba(187,33,36, 0.7); font-size:0.9em;">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  {{ $error }}
+              </div>
+              @endif
                 <p class="login-box-msg">Sign in to start your session</p>
-                @if ($error = $errors->first('password'))
-                  <div class="alert alert-danger">
-                    {{ $error }}
-                  </div>
-                @endif
                 <form action="{{ route('postlogin') }}" method="post">
                     {{ csrf_field() }}
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        <input type="email" class="form-control border1" name="email" placeholder="Email" required>
                         <div class="input-group-append">
-                            <div class="input-group-text">
+                            <div class="input-group-text" style="border-top-right-radius: 25px;border-bottom-right-radius:25px">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        <input type="password" class="form-control border1" name="password" placeholder="Password" required>
                         <div class="input-group-append">
-                            <div class="input-group-text">
+                            <div class="input-group-text" style="border-top-right-radius: 25px;border-bottom-right-radius:25px">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="icheck-primary" style="float:right">
-                              <a style="font-family:Poppins;font-size:0.85em;color:gray" href="{{route('forgot-password')}}"><strong>Forgot password?</strong></a>
+                            <div  style="float:right">
+                              <a style="font-family:Poppins;font-size:0.95em;color:gray" href="{{route('forgot-password')}}"><strong>Forgot password?</strong></a>
+                            </div>
+                            <div style="float:left">
+                              <input type="checkbox" name="remember_token" > <a style="color:gray"><strong>Remember me</strong></a>
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-4" style="margin:auto;margin-top:20px">
+                        <button type="submit" class="btn btn-primary btn-block" style="width:125%">Sign In</button>
+                        <!-- <input type="button" class="btn btn-default btn-block" onclick="location.href='{{route('registrasi')}}';" value="Register" /> -->
+                            <!-- <button type="submit" class="btn btn-default btn-block">Register</button> -->
+                    </div>
                 </form>
-                <div class="col-4" style="margin:auto;margin-top:10px">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    <!-- <input type="button" class="btn btn-default btn-block" onclick="location.href='{{route('registrasi')}}';" value="Register" /> -->
-                        <!-- <button type="submit" class="btn btn-default btn-block">Register</button> -->
-                </div>
             </div>
             <!-- /.login-card-body -->
         </div>
@@ -204,4 +217,7 @@
     @include('Template.script')
 
 </body>
+<!-- Bootstrap JavaScript Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </html>
