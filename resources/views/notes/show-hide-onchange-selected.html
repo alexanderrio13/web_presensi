@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+
+<h2></h2>
+<select onchange="testValue(this);">
+<option></option>
+  <option selected>Dawn</option>
+  <option>Noon</option>
+  <option>Dusk</option>
+  <option>Midnight</option>
+</select>
+<br>
+<br>
+<div style="display:inline-block;position:fixed;" >
+
+<div id="lihat1" >
+<button type="submit" class="btn btn-success">Lihat1 <i class="fas fa-print"></i></button>
+</div>
+
+<div id="lihat2" >
+<button type="submit" class="btn btn-success">Lihat2 <i class="fas fa-print"></i></button>
+</div>
+
+</div>
+
+<script>
+function testValue(selection) {
+var x = document.getElementById("lihat1");
+  if (selection.value == "") {
+
+    x.style.visibility = "hidden";
+
+    }
+
+  else {
+
+    x.style.visibility = "visible";
+    }
+
+    var y = document.getElementById("lihat2");
+  if (selection.value != "") {
+
+    y.style.visibility = "hidden";
+
+    }
+
+  else {
+
+    y.style.visibility = "visible";
+    }
+
+  }
+
+</script>
+
+</body>
+</html>

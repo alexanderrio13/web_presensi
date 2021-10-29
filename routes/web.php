@@ -6,10 +6,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PresensiController;
 
 
-
 Route::get('/', function () {
     return view('Login.Login-aplikasi');
 });
+
 
 
 route::get('/registrasi',[LoginController::class,'registrasi'])->name('registrasi');
@@ -17,12 +17,16 @@ route::post('/simpanregistrasi',[LoginController::class,'simpanregistrasi'])->na
 route::get('/login',[LoginController::class,'halamanlogin'])->name('login');
 route::post('/postlogin',[LoginController::class,'postlogin'])->name('postlogin');
 route::get('/logout',[LoginController::class,'logout'])->name('logout');
+route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot-password');
+route::get('forgot-password/{token}', [LoginController::class, 'forgotPasswordValidate']);
+route::post('forgot-password', [LoginController::class, 'resetPassword'])->name('forgot-password');
+route::put('reset-password', [LoginController::class, 'updatePassword'])->name('reset-password');
 
 
 Route::group(['middleware' => ['auth','ceklevel:karyawan']], function () {
     route::get('/home',[HomeController::class,'index'])->name('dashboard-karyawan');
 });
-Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
+Route::group(['middleware' => ['auth','ceklevel:administrator']], function () {
     route::get('/admin-dashboard',[HomeController::class,'adminIndex'])->name('dashboard-admin');
     Route::get('/karyawan/tambah/',[HomeController::class,'tambah']);
     Route::post('/karyawan/store',[HomeController::class,'store']);

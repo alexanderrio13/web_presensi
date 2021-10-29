@@ -19,10 +19,31 @@ class HomeController extends Controller
 
     public function adminIndex(){
       $user_id = Auth::user()->id;
-      $sudahpresensi = Presensi::whereNotNull('jammasuk')->whereDate('created_at', Carbon::today())->get();
-      $terlambat = Presensi::where('jammasuk','>','08:30:59')->whereDate('created_at', Carbon::today())->get();
-      $karyawan = User::where('level','=',"karyawan")->get();
-      return view('Home-admin',compact('sudahpresensi','terlambat','karyawan'));
+      $today_presensi = Presensi::whereNotNull('jammasuk')->whereDate('created_at', Carbon::today())->get();
+      $today_terlambat = Presensi::where('jammasuk','>','08:30:59')->whereDate('created_at', Carbon::today())->get();
+      $tot_karyawan = User::where('level','=',"karyawan")->get();
+
+      $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      $terlambat = [];
+      foreach ($month as $key => $value) {
+          $terlambat[] = Presensi::where(DB::raw("DATE_FORMAT(created_at, '%M')"),$value)->where('jammasuk','>','08:30:59')->count();
+      }
+      $ontime = [];
+      foreach ($month as $key => $value) {
+          $ontime[] = Presensi::where(DB::raw("DATE_FORMAT(created_at, '%M')"),$value)->where('jammasuk','<','08:31:00')->count();
+      }
+      $null_pulang = [];
+      foreach ($month as $key => $value) {
+          $null_pulang[] = Presensi::where(DB::raw("DATE_FORMAT(created_at, '%M')"),$value)->whereNull('jamkeluar')->count();
+      }
+      return view('Home-admin',compact('today_presensi','today_terlambat','tot_karyawan'))
+              ->with('month',json_encode($month,JSON_NUMERIC_CHECK))->with('terlambat',json_encode($terlambat,JSON_NUMERIC_CHECK))
+              ->with('month',json_encode($month,JSON_NUMERIC_CHECK))->with('ontime',json_encode($ontime,JSON_NUMERIC_CHECK))
+              ->with('month',json_encode($month,JSON_NUMERIC_CHECK))->with('null_pulang',json_encode($null_pulang,JSON_NUMERIC_CHECK));
+
+              // ->with('click',json_encode($click,JSON_NUMERIC_CHECK))
+
+      // return view('Home-admin',compact('sudahpresensi','terlambat','karyawan'));
     }
 
     public function hapus($id){
@@ -40,7 +61,9 @@ class HomeController extends Controller
         'email' => $request->email,
         'password' => bcrypt($request->password),
         'jabatan' => $request->jabatan,
-        'level' => $request->get('level')
+        'level' => $request->get('level'),
+        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
       ]);
       return redirect('/admin-dashboard');
     }
@@ -54,7 +77,7 @@ class HomeController extends Controller
       DB::table('users')->where('id',$request->id)->update([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => $request->password,
+        'password' => bcrypt($request->password),
         'jabatan' => $request->jabatan,
         'level' => $request->get('level')
       ]);

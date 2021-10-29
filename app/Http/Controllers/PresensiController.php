@@ -218,7 +218,6 @@ class PresensiController extends Controller
       return view('Presensi.Rekap-lembur-karyawan',compact('lembur'));
     }
 
-
     public function update(Request $request, $id)
     {
         //

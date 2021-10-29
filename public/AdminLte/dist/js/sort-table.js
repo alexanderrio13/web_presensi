@@ -208,7 +208,7 @@ sortTable.input = function(Cell) {
  * @param Cell A TD DOM object
  * @returns null
  */
-sortTable.none = function(Cell) {
+sortTable.none = function(Cell, Table, col) {
     return null;
 };
 
