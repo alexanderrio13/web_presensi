@@ -12,8 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Go-Blog | Admin Dashboard</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!-- Bootstrap -->
-    <!-- <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -21,8 +20,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- bootstrap-progressbar -->
     <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 
+    <!-- drop down sidebar -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="AdminLte/dist/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="AdminLte/dist/css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="AdminLte/dist/css/bootstrap.min.css">
+
+    <script src="AdminLte/dist/js/main.js"></script>
+    <!-- export table as excel -->
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
     @include('Template.head')
 
     <style>
