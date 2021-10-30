@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                                 </div>
                                 <div class="form-group">
-                                  <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                                  <button type="submit" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Show</i></button>
                                 </div>
                           </form>
                         </div><!-- /.container-fluid -->

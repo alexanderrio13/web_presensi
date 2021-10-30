@@ -38,6 +38,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <!-- export table as excel -->
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
     @include('Template.head')
 
 </head>
@@ -148,7 +150,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                              <button type="submit" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Show</button>
+                              <a type="button" class="btn btn-default" onclick="ExportToExcel('xlsx')"><i class="fa fa-print" aria-hidden="true"></i> Export </a>
                             </div>
                           </form>
                             <div <div style="overflow-x:auto;" class="table-responsive custom-table-responsive">
@@ -275,6 +278,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
         } );
     } );
+    // save table as excel
+    function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('MyTable');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+         XLSX.writeFile(wb, fn || ('RekapPresensiAll.' + (type || 'xlsx')));
+    }
     </script>
     <!-- jQuery -->
     @include('Template.script')

@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="/filter-data" class="btn btn-warning"> Back </a>
                                   </div>
                                   <div style="float:left;margin-left:5px">
-                                    <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Show</i></button>
                                   </div>
                                 </div>
                           </form>

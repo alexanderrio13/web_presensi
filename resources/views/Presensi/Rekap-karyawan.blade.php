@@ -13,6 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
     <!-- sortable: Import js dari C:\xampp\htdocs\absensi\public\AdminLte\dist\js -->
     <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
+    <!-- export table as excel -->
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
     @include('Template.head')
 
 </head>
@@ -141,11 +143,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Lihat <i class="fas fa-print"></i></button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Show</button>
+                                <a type="button" class="btn btn-default" onclick="ExportToExcel('xlsx')"><i class="fa fa-print" aria-hidden="true"></i> Export </a>
                             </div>
                           </form>
+
                             <div class="form-group">
-                                  <table class="table custom-table js-sort-table" id="myTable" border="1" style="  table-layout: fixed;width: 100%;">
+                                  <table class="table custom-table js-sort-table" id="MyTable" border="1" style="  table-layout: fixed;width: 100%;">
                                     <tr style="background:#bab8b8">
                                         <th>Karyawan</th>
                                         <th>Tanggal</th>
@@ -236,6 +240,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       //
       //    window.open('filter-data/all','_self');
       //   }
+    }
+    // save table as excel
+    function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('MyTable');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+         XLSX.writeFile(wb, fn || ('RekapPresensi.' + (type || 'xlsx')));
     }
     </script>
     <!-- jQuery -->

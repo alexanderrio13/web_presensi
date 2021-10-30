@@ -36,6 +36,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="{{ asset('AdminLte/dist/js/sort-table.js') }}"></script>
 
         <script src="AdminLte/dist/js/main.js"></script>
+        <!-- export table as excel -->
+        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
     @include('Template.head')
 
     <style>
@@ -106,12 +108,10 @@ tr:nth-child(even){
                       <div class="card-header">Lihat Data</div>
                         <div class="card-body">
                           <div class="form-group">
-                            <!-- <div style="max-width:400px;margin:auto;float:right">
-                              <div class="input-icons">
-                                <i class="fas fa-search icon"></i>
-                                <input type="text" id="myInput" class="input-field" onkeyup="myFunction()" placeholder="Search" title="Type in a name">
-                              </div>
-                            </div> -->
+                            <div>
+                              <button class="btn btn-default" onclick="ExportToExcel('xlsx')"><i class="fa fa-print" aria-hidden="true"></i> Export table</button>
+                            </div>
+                            <br>
                             <table id="MyTable" class="table table-bordered custom-table js-sort-table" cellspacing="0">
                               <thead>
                                 <tr style="background:#bab8b8">
@@ -119,7 +119,7 @@ tr:nth-child(even){
                                     <th>Tanggal</th>
                                     <th>Mulai</th>
                                     <th>Selesai</th>
-                                    <th>Jumlah Lembur</th>
+                                    <th>Lama Lembur</th>
                                     <th>Mengetahui SPV</th>
                                     <th>Pengerjaan</th>
                                   </tr>
@@ -188,6 +188,14 @@ tr:nth-child(even){
             }
         } );
     } );
+    // save table as excel
+    function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('MyTable');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+         XLSX.writeFile(wb, fn || ('RekapLembur.' + (type || 'xlsx')));
+    }
 
     </script>
     <!-- jQuery -->
