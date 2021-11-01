@@ -23,7 +23,7 @@ class HomeController extends Controller
       $today_terlambat = Presensi::where('jammasuk','>','08:30:59')->whereDate('created_at', Carbon::today())->get();
       $tot_karyawan = User::where('level','=',"karyawan")->get();
 
-      $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      $month = ['September', 'October', 'November', 'December', 'January', 'February'];
       $terlambat = [];
       foreach ($month as $key => $value) {
           $terlambat[] = Presensi::where(DB::raw("DATE_FORMAT(created_at, '%M')"),$value)->where('jammasuk','>','08:30:59')->count();

@@ -305,7 +305,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       window.onload = function() {
           var ctx = document.getElementById("canvas").getContext("2d");
           window.myBar = new Chart(ctx, {
-              type: 'line',
+              type: 'bar',
               data: barChartData,
               options: {
                   elements: {
