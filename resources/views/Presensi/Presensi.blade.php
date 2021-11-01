@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .alert{
   /* background: #ffdb9b; */
   padding: 20px 40px;
-  min-width: 420px;
+  min-width: 220px;
   right: 0;
   top: 10px;
   border-radius: 4px;
@@ -155,7 +155,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content">
                 <div class="row justify-content-center" style="margin-left: 10px;margin-right: 10px;">
                     <div class="card card-info card-outline">
-
+                      <div class="card-header" style="margin:0 auto;">
+                        <p id="GFG_UP"
+                        style="font-size: 35px;
+                            font-weight: bold;">
+                        </p>
+                        <script>
+                            var el_up = document.getElementById("GFG_UP");
+                            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                            var day = days[new Date().getDay()];
+                            var today = new Date();
+                            var date = today.getDate();
+                            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                            var month = months[new Date().getMonth()];
+                            var year = today.getFullYear();
+                            el_up.innerHTML = day+', '+month+' '+date+' '+year;
+                        </script>
+                      </div>
                         @if ($message = Session::get('warning'))
                         <div class="alert alert-warning show showAlert show_slide hide" style="border-left: 8px solid #ffa502;">
                           <button type="button" class="close" data-dismiss="alert"><span class="fas fa-times"></span></button>
@@ -174,23 +190,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                 <div class="form-group">
                                   <center>
-                                  <p id="GFG_UP"
-                                  style="font-size: 18px;
-                                      font-weight: normal;
-                                      ">
-                                  </p>
-                                  <script>
-                                      var el_up = document.getElementById("GFG_UP");
-                                      var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                                      var day = days[new Date().getDay()];
-                                      var today = new Date();
-                                      var date = today.getDate();
-                                      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                      var month = months[new Date().getMonth()];
-                                      var year = today.getFullYear();
-                                      el_up.innerHTML = day+', '+month+' '+date+' '+year;
-                                  </script>
-
                                         <label id="clock" style="font-size: 40px; color: #0A77DE; -webkit-text-stroke: 2px #00ACFE;
                                                     text-shadow: 1px 1px 2px #36D6FE,
                                                     4px 4px 20px #36D6FE,
@@ -230,7 +229,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <form action="{{ route('presensi-masuk') }}" method="get">
 
                                           <div class="form-group">
-                                            <button type="submit" class="btn btn-info" style="padding: 12px;">
+                                            <button type="submit" class="btn btn-info" style="padding: 12px;border-radius:15px " >
                                               <i class="fas fa-door-open" aria-hidden="true"></i>
                                               <a style="font-size:1em">Presensi Masuk</a>
                                             </button>
@@ -243,7 +242,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                           <center>
                                               <div class="form-group">
-                                                  <button type="submit" class="btn btn-dark" style="padding: 12px;">
+                                                  <button type="submit" class="btn btn-dark" style="padding: 12px;border-radius:15px">
                                                     <i class="fas fa-door-closed" aria-hidden="true"></i>
                                                     <a style="font-size:1em">Presensi Keluar</a>
                                                   </button>

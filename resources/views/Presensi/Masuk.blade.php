@@ -7,6 +7,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Absen Masuk</title>
     @include('Template.head')
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
         #results { padding:10px; border:1px solid; border-width:0px; border-radius: 5px;background:#ccc; }
     </style>
@@ -42,7 +44,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             position: absolute;
             left: 10px;
             top: 140px;
-
         }
         .hidden-div {
         visibility:hidden;
@@ -54,9 +55,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
       }
 
       aside[data-visible="true"] {
-  display: flex;
-  flex-direction: column;
-}
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media screen and (max-width: 1024px) {
+
+        .part1 {
+            position: absolute;
+            left: 55px;
+            top: 200px;
+
+        }
+
+      }
 
     </style>
 
@@ -126,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   {{ csrf_field() }}
                                 <center>
                                   <div class="parts-container">
-                                    <div id="my_camera" style="margin:0 auto;" ></div>
+                                    <div id="my_camera" style="margin:0 auto;"></div>
                                     <br/>
                                     <div id="show" class="parts-container">
                                     <input type=button class="btn btn-info" value="Take Picture" onClick="take_snapshot()">
@@ -153,7 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark" data-visible="true">
+          <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
                 <h5>Today's Activity</h5>
@@ -187,12 +199,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('Template.script')
         <!-- Configure a few settings and attach camera -->
     <script language="JavaScript">
-        Webcam.set({
-            width: 440,
-            height: 340,
-            image_format: 'jpeg',
-            jpeg_quality: 90
-        });
+        if ($(window).width() <= 1024 ) {
+
+            Webcam.set({
+                width: 240,
+                height: 340,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+
+          } else{
+            Webcam.set({
+                width: 440,
+                height: 340,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+        }
+
         Webcam.attach( '#my_camera' );
         function take_snapshot() {
             Webcam.snap( function(data_uri) {

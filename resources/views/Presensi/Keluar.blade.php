@@ -7,6 +7,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <title>Go-Blog | Absen Pulang</title>
     @include('Template.head')
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
         #results { padding:10px; border:1px solid; border-width:0px; border-radius: 5px;background:#ccc; }
     </style>
@@ -51,6 +53,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
       #left, #right
       {
         display:inline;
+      }
+      @media screen and (max-width: 1024px) {
+
+        .part1 {
+            position: absolute;
+            left: 55px;
+            top: 200px;
+
+        }
+
       }
 
     </style>
@@ -190,12 +202,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('Template.script')
         <!-- Configure a few settings and attach camera -->
     <script language="JavaScript">
-        Webcam.set({
-            width: 440,
-            height: 340,
-            image_format: 'jpeg',
-            jpeg_quality: 90
-        });
+        if ($(window).width() <= 1024 ) {
+
+            Webcam.set({
+                width: 240,
+                height: 340,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+
+          } else{
+            Webcam.set({
+                width: 440,
+                height: 340,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+        }
         Webcam.attach( '#my_camera' );
         function take_snapshot() {
             Webcam.snap( function(data_uri) {
