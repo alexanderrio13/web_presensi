@@ -44,6 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             position: absolute;
             left: 10px;
             top: 140px;
+
         }
         .hidden-div {
         visibility:hidden;
@@ -61,12 +62,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       @media screen and (max-width: 1024px) {
 
-        .part1 {
-            position: absolute;
-            left: 55px;
-            top: 200px;
+      .part1 {
+          position: absolute;
+          left: 60px;
+          top: 200px;
 
-        }
+      }
 
       }
 
@@ -145,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                     <input type="hidden" name="image_in" class="image-tag">
                                   </div>
-                                  <div id="hide" class="hidden-div">
+                                  <div id="hide" class="hidden-div justify-content-center">
                                     <div id="results" class="part1"></div>
                                     <div id="left">
                                       <button type="submit" class="btn btn-info"><i class="fas fa-check"></i> Submit</button>
@@ -174,14 +175,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <p> Presensi Masuk : <strong>{{ $item->jammasuk }}</strong> </p>
                     <p> Status :
                     @if ($item->jammasuk > '08:30:59')
-                    <span class="badge badge-danger">Terlambat</span>
+                    <span class="badge badge-danger">Terlambat {{date('H:i:s',strtotime($item->jammasuk) - strtotime("08:31:00") - strtotime("14:07:12"))}}</span>
                     @else
                     <span class="badge badge-success">On Time</span>
                     @endif
                     </p>
                     <p> Presensi Keluar : <strong>{{ $item->jamkeluar }}</strong> </p>
-                    <p> Jam Kerja : <strong>{{ $item->jamkerja }}</strong> </p>
-                    @endforeach
+                    <p> Status Presensi :
+                      @if ($item->jammasuk < '08:30:59' && $item->jamkeluar > '17:30:00')
+                      <span class="badge badge-success">Memenuhi</span>
+                      @else
+                      <span class="badge badge-warning">Tidak Memenuhi</span>
+                      @endif
+
+                  @endforeach
 
 
             </div>

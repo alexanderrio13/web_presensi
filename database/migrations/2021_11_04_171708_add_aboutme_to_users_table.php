@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLoginFieldsToUsersTable extends Migration
+class AddAboutmeToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,11 @@ class AddLoginFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->datetime('last_login_at')->nullable()->after('remember_token');
-            $table->string('last_login_ip')->nullable()->after('remember_token');
             $table->string('gender')->after('email');
             $table->string('address')->nullable()->after('email');
             $table->string('ttl')->nullable()->after('email');
             $table->string('phone')->nullable()->after('email');
+            $table->longText('note')->nullable()->after('last_login_at');
         });
     }
 
@@ -31,12 +30,11 @@ class AddLoginFieldsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('last_login_at');
-            $table->dropColumn('last_login_ip');
             $table->dropColumn('gender');
             $table->dropColumn('address');
             $table->dropColumn('ttl');
             $table->dropColumn('phone');
+            $table->dropColumn('note');
         });
     }
 }

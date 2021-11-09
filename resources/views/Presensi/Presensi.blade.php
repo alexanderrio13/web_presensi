@@ -173,14 +173,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </script>
                       </div>
                         @if ($message = Session::get('warning'))
-                        <div class="alert alert-warning show showAlert show_slide hide" style="border-left: 8px solid #ffa502;">
-                          <button type="button" class="close" data-dismiss="alert"><span class="fas fa-times"></span></button>
+                        <div class="alert alert-warning show showAlert show_slide hide" style="border-left: 8px solid #ffa502;background:#fed797">
+                          <button type="button" class="close" data-dismiss="alert" style="color:#ffa502"><span class="fas fa-times"></span></button>
                           <span class="fas fa-exclamation-circle"></span>
-                          <span style="padding: 0 20px;font-size: 18px;color: #ce8500;">{{ $message }}</span>
+                          <span style="padding: 0 20px;font-size: 18px;color:#a68943;">{{ $message }}</span>
                         </div>
                         @endif
                         @if ($message = Session::get('sukses'))
-                        <div class="alert alert-success show hide showAlert show_slide" style="border-left: 8px solid green;">
+                        <div class="alert alert-success show hide showAlert show_slide" style="border-left: 8px solid green;background:#84e0ca">
                           <button type="button" class="close" data-dismiss="alert"><span class="fas fa-times"></span></button>
                           <span class="fas fa-check-circle"></span>
                           <span style="padding: 0 20px;font-size: 18px;color: green">{{ $message }}</span>
@@ -199,21 +199,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </center>
                                 </div>
                                 <center>
-                                  <div style="height:50px;width:80%;border-radius:45px;border-color:#17a2b8;border-style:thin;border-width:thin;background:#EFF1F1;margin-bottom:10px">
+                                    <div style="height:60px;width:80%;border-radius:45px;border-color:#17a2b8;border-style:thin;border-width:thin;background:#EFF1F1;margin-bottom:10px;box-shadow: 5px 7px #888888;">
 
-                                      <a style="font-size: 1em; color: #0A77DE; -webkit-text-stroke: 1.5px #00ACFE;
+                                      <a style="font-size: 1.1em; color: #0A77DE; -webkit-text-stroke: 1.5px #00ACFE;
                                                 text-shadow: 2px 2px 5px #0A77DE,
-                                                font-family: Poppins;float:left;margin-left:5%">Jam masuk<br> 08:30
+                                                font-family: Poppins;float:left;margin-left:10%;margin-top:2%">Jam masuk<br> 08:30
                                       </a>
 
 
 
-                                      <i class="fa fa-clock-o fa-2x" aria-hidden="true" style="padding-top:3%"></i>
+                                      <i class="fa fa-clock-o fa-3x" aria-hidden="true" style="padding-top:1.5%"></i>
 
 
-                                      <a style="font-size: 1em; color: #0A77DE; -webkit-text-stroke: 1.5px #00ACFE;
+                                      <a style="font-size: 1.1em; color: #0A77DE; -webkit-text-stroke: 1.5px #00ACFE;
                                                 text-shadow: 2px 2px 5px #0A77DE,
-                                                font-family: Poppins;float:right;margin-right:5%">Jam pulang<br> 17:30
+                                                font-family: Poppins;float:right;margin-right:10%;margin-top:2%">Jam pulang<br> 17:30
                                       </a>
 
 
@@ -229,7 +229,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <form action="{{ route('presensi-masuk') }}" method="get">
 
                                           <div class="form-group">
-                                            <button type="submit" class="btn btn-info" style="padding: 12px;border-radius:15px " >
+                                            <button type="submit" class="btn btn-info" style="padding: 12px;border-radius:15px;box-shadow: 4px 4px #888888; " >
                                               <i class="fas fa-door-open" aria-hidden="true"></i>
                                               <a style="font-size:1em">Presensi Masuk</a>
                                             </button>
@@ -242,7 +242,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                           <center>
                                               <div class="form-group">
-                                                  <button type="submit" class="btn btn-dark" style="padding: 12px;border-radius:15px">
+                                                  <button type="submit" class="btn btn-dark" style="padding: 12px;border-radius:15px;box-shadow: 3px 3px #888888;">
                                                     <i class="fas fa-door-closed" aria-hidden="true"></i>
                                                     <a style="font-size:1em">Presensi Keluar</a>
                                                   </button>
@@ -276,14 +276,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <p> Presensi Masuk : <strong>{{ $item->jammasuk }}</strong> </p>
                     <p> Status :
                     @if ($item->jammasuk > '08:30:59')
-                    <span class="badge badge-danger">Terlambat</span>
+                    <span class="badge badge-danger">Terlambat {{date('H:i:s',strtotime($item->jammasuk) - strtotime("08:31:00") - strtotime("14:07:12"))}}</span>
                     @else
                     <span class="badge badge-success">On Time</span>
                     @endif
                     </p>
-                    <p> Presensi Keluar : <strong>{{ $item->jamkeluar ?? '-' }}</strong> </p>
-                    <p> Jam Kerja : <strong>{{ $item->jamkerja ?? '-' }}</strong> </p>
-                    @endforeach
+                    <p> Presensi Keluar : <strong>{{ $item->jamkeluar }}</strong> </p>
+                    <p> Status Presensi :
+                      @if ($item->jammasuk < '08:30:59' && $item->jamkeluar > '17:30:00')
+                      <span class="badge badge-success">Memenuhi</span>
+                      @else
+                      <span class="badge badge-warning">Tidak Memenuhi</span>
+                      @endif
+
+                 @endforeach
 
 
             </div>

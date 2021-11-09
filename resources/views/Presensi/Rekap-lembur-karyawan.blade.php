@@ -109,7 +109,7 @@ tr:nth-child(even){
                         <div class="card-body">
                           <div class="form-group">
                             <div>
-                              <button class="btn btn-default" onclick="ExportToExcel('xlsx')"><i class="fa fa-print" aria-hidden="true"></i> Export table</button>
+                              <button class="btn btn-default" onclick="ExportToExcel('xlsx')"><i class="fa fa-print" aria-hidden="true"></i> Export</button>
                             </div>
                             <br>
                             <table id="MyTable" class="table table-bordered custom-table js-sort-table" cellspacing="0">

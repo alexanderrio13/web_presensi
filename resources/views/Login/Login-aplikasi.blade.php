@@ -108,7 +108,6 @@
         }
         .zoom {
           padding: 50px;
-
           transition: transform .4s; /* Animation */
           width: 200px;
           height: 200px;
@@ -116,7 +115,7 @@
         }
 
         .zoom:hover {
-          transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+          transform: scale(1.15); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
 
         @media screen and (max-width: 1024px) {
@@ -137,6 +136,7 @@
             width:390px;
             height:540px;
             margin:0 auto;
+
 
           }
         }

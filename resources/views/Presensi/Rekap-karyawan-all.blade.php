@@ -163,6 +163,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th scope="col">Masuk</th>
                                         <th scope="col">Pulang</th>
                                         <th scope="col">Jumlah Jam Kerja</th>
+                                        <th scope="col">Capture Masuk</th>
+                                        <th scope="col">Capture Pulang</th>
                                         <th scope="col">Status Presensi</th>
 
                                     </tr>
@@ -174,7 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <td>{{ $item->tgl }}</td>
                                         <td>
                                           @if ($item->jammasuk > '08:30:59')
-                                          <span class="badge badge-danger">Terlambat</span>
+                                          <span class="badge badge-danger">Terlambat {{date('H:i:s',strtotime($item->jammasuk) - strtotime("08:31:00") - strtotime("14:07:12"))}}</span>
                                           @else
                                           <span class="badge badge-success">On Time</span>
                                           @endif
@@ -189,6 +191,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </td>
                                         <td>@if ($item->jamkerja)
                                           {{ $item->jamkerja}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>@if ($item->image_in)
+                                          <a href="{{ asset("Rioadi/uploads_in/$item->image_in") }}" target="_blank"> {{ $item->image_in}}</a>
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>@if ($item->image_out)
+                                          <a href="{{ asset("Rioadi/uploads_out/$item->image_out") }}" target="_blank">{{ $item->image_out}}</a>
                                           @else
                                           <span class="badge badge-warning">No data</span>
                                           @endif

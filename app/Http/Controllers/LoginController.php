@@ -99,7 +99,7 @@ class LoginController extends Controller
         Mail::to($request->email)->send(new ResetPassword($user->name, $token));
 
         if(Mail::failures() != 0) {
-            return back()->with('success', 'Success! password reset link has been sent to your email');
+            return back()->with('success', 'Success! password reset link has been sent, please check your inbox!');
         }
         return back()->with('failed', 'Failed! there is some issue with email provider');
     }

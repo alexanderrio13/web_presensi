@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'last_login_at',
         'last_login_ip',
+        'note',
 
     ];
 
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function lembur()
     {
         return $this->hasMany(Lembur::class);
+    }
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);
     }
 }

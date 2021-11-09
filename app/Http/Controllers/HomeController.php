@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Presensi;
 use App\Models\User;
+use App\Models\Report;
 use Carbon\Carbon;
 use Auth;
 use DB;
@@ -14,7 +15,63 @@ use DB;
 class HomeController extends Controller
 {
     public function index(){
-        return view('Home');
+      $user_id = Auth::user()->id;
+      $user = User::find($user_id);
+      $reports = Report::with('user')->where('user_id',$user_id)->get();
+      // user_id di define biar bisa get di store methods
+      return view('Home',compact('user','reports','user_id'));
+    }
+
+    public function updateAccount(Request $request)
+    {
+      $id = Auth::user()->id;
+      $user = User::find($id);
+      $user->email = $request->input('email');
+      $user->password = bcrypt($request->input('password'));
+      $user->phone = $request->input('phone');
+      $user->ttl = $request->input('ttl');
+      $user->address = $request->input('address');
+      $user->gender = $request->input('gender');
+      $user->save();
+      return redirect('/home');
+    }
+
+    public function updateNote(Request $request)
+    {
+      $id = Auth::user()->id;
+      $user = User::find($id);
+      $user->note = $request->input('note');
+      $user->save();
+      return redirect('/home');
+    }
+
+    public function reportStore(Request $request)
+    {
+
+      $user_id = Auth::user()->id;
+      $report = new Report;
+      $report->user_id = $request->get('user_id');
+      $report->subject = $request->addSubject;
+      $report->content = $request->addContent;
+      $report->status = $request->addStatus;
+      $report->save();
+      return redirect('/home');
+
+    }
+
+    public function reportDestroy($id){
+      DB::table('reports')->where('id',$id)->delete();
+      return redirect('/home');
+    }
+
+    public function reportEdit(Request $request, $id){
+      $report = Report::find($id);
+      $report->subject = $request->editSubject;
+      $report->content = $request->editContent;
+      $report->status = $request->editStatus;
+      $report->save();
+      return redirect('/home');
+
     }
 
     public function adminIndex(){

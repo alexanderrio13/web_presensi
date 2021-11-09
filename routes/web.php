@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\ReportController;
 
 
 Route::get('/', function () {
@@ -24,7 +25,12 @@ route::put('reset-password', [LoginController::class, 'updatePassword'])->name('
 
 
 Route::group(['middleware' => ['auth','ceklevel:karyawan']], function () {
-    route::get('/home',[HomeController::class,'index'])->name('dashboard-karyawan');
+    route::get('/home/',[HomeController::class,'index'])->name('dashboard-karyawan');
+    route::post('/home/update',[HomeController::class,'updateAccount']);
+    route::post('/home/update/note',[HomeController::class,'updateNote']);
+    route::post('/home', 'HomeController@reportStore');
+    route::put('/home/report/edit/{Report}', 'HomeController@reportEdit');
+    route::get('/home/report/hapus/{id}', 'HomeController@reportDestroy');
 });
 Route::group(['middleware' => ['auth','ceklevel:administrator']], function () {
     route::get('/admin-dashboard',[HomeController::class,'adminIndex'])->name('dashboard-admin');

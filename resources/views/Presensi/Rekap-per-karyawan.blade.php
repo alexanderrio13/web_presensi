@@ -11,6 +11,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Go-Blog | History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- js buat sidebar -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -86,9 +90,18 @@ tr:nth-child(even){
  .custom-width{
    width:100%;
  }
+ .overflow{
+   overflow-x:fixed;
+ }
  @media screen and (max-width: 1024px) {
    .custom-width{
      width:150%;
+   }
+   table {
+     table-layout:auto;
+   }
+   .overflow{
+     overflow-x:auto;
    }
  }
 
@@ -107,7 +120,7 @@ tr:nth-child(even){
         @include('Template.left-sidebar')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="overflow-x:auto">
           <!-- Content Header (Page header) -->
           <div class="content-header">
               <div class="container-fluid">
@@ -128,7 +141,7 @@ tr:nth-child(even){
             <!-- /.content-header -->
 
             <!-- Main content -->
-              <div style="overflow-x:auto;" class="content able-responsive custom-table-responsive">
+              <div class="content able-responsive custom-table-responsive">
                 <div class="custom-width row justify-content-center">
                     <div class="card card-info card-outline" style="margin-right:10px;margin-left:10px">
                         <div class="card-header">Data Presensi</div>
@@ -147,7 +160,7 @@ tr:nth-child(even){
                                     Lihat <i class="fas fa-print"></i>
                                 </a>
                             </div> -->
-                            <div class="form-group" >
+                            <div class="form-group overflow">
                                 <table id="MyTable" class="table table-bordered custom-table js-sort-table" cellspacing="0">
                                   <thead>
                                     <tr style="background:#bab8b8">
@@ -155,7 +168,9 @@ tr:nth-child(even){
                                         <th class="js-sort-string">Tanggal</th>
                                         <th>Masuk</th>
                                         <th>Pulang</th>
-                                        <th>Jumlah Jam Kerja</th>
+                                        <th>Lama Kerja</th>
+                                        <th>Capture Masuk</th>
+                                        <th>Capture Pulang</th>
                                         <th>Status Presensi</th>
                                     </tr>
                                   </thead>
@@ -165,7 +180,7 @@ tr:nth-child(even){
                                         <td>{{ $item->tgl }}</td>
                                         <td>
                                           @if ($item->jammasuk > '08:30:59')
-                                          <span class="badge badge-danger">Terlambat</span>
+                                          <span class="badge badge-danger">Terlambat {{date('H:i:s',strtotime($item->jammasuk) - strtotime("08:31:00") - strtotime("14:07:12"))}}</span>
                                           @else
                                           <span class="badge badge-success">On Time</span>
                                           @endif
@@ -180,6 +195,18 @@ tr:nth-child(even){
                                         </td>
                                         <td>@if ($item->jamkerja)
                                           {{ $item->jamkerja}}
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>@if ($item->image_in)
+                                          <a href="{{ asset("Rioadi/uploads_in/$item->image_in") }}" target="_blank"> {{ $item->image_in}}</a>
+                                          @else
+                                          <span class="badge badge-warning">No data</span>
+                                          @endif
+                                        </td>
+                                        <td>@if ($item->image_out)
+                                          <a href="{{ asset("Rioadi/uploads_out/$item->image_out") }}" target="_blank">{{ $item->image_out}}</a>
                                           @else
                                           <span class="badge badge-warning">No data</span>
                                           @endif
@@ -208,7 +235,7 @@ tr:nth-child(even){
             <div class="card card-info card-outline" style="margin-right:10px;margin-left:10px">
                 <div class="card-header">Data Lembur</div>
                 <div class="card-body">
-                    <div class="form-group">
+                    <div class="form-group overflow">
                       <table id="MyTable2" class="table table-bordered custom-table js-sort-table" cellspacing="0">
                         <thead>
                           <tr style="background:#bab8b8">
