@@ -26,13 +26,30 @@ class HomeController extends Controller
     {
       $id = Auth::user()->id;
       $user = User::find($id);
-      $user->email = $request->input('email');
-      $user->password = bcrypt($request->input('password'));
-      $user->phone = $request->input('phone');
-      $user->ttl = $request->input('ttl');
-      $user->address = $request->input('address');
-      $user->gender = $request->input('gender');
-      $user->save();
+      if ($user->password != $request->input('password')){
+        $user->password = bcrypt($request->password);
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->ttl = $request->input('ttl');
+        $user->address = $request->input('address');
+        $user->gender = $request->input('gender');
+        $user->save();
+      }
+      else {
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->ttl = $request->input('ttl');
+        $user->address = $request->input('address');
+        $user->gender = $request->input('gender');
+        $user->save();
+      }
+      // $user->email = $request->input('email');
+      // $user->password = bcrypt($request->input('password'));
+      // $user->phone = $request->input('phone');
+      // $user->ttl = $request->input('ttl');
+      // $user->address = $request->input('address');
+      // $user->gender = $request->input('gender');
+      // $user->save();
       return redirect('/home');
     }
 
@@ -131,13 +148,30 @@ class HomeController extends Controller
     }
 
     public function update(Request $request){
-      DB::table('users')->where('id',$request->id)->update([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'jabatan' => $request->jabatan,
-        'level' => $request->get('level')
-      ]);
+      $user = User::where('id','=',$request->id)->get()->first();
+      if ($user->password != $request->get('password')){
+        $user->password = bcrypt($request->password);
+        $user->name = $request->get('name');
+        $user->jabatan = $request->get('jabatan');
+        $user->email = $request->get('email');
+        $user->level = $request->get('level');
+        $user->save();
+      }
+      else {
+        $user->name = $request->get('name');
+        $user->jabatan = $request->get('jabatan');
+        $user->email = $request->get('email');
+        $user->level = $request->get('level');
+        $user->save();
+      }
+
+      // DB::table('users')->where('id',$request->id)->update([
+      //   'name' => $request->name,
+      //   'email' => $request->email,
+      //   'password' => if (bcrypt($request->password) != bcrypt($request->get('password'))),
+      //   'jabatan' => $request->jabatan,
+      //   'level' => $request->get('level')
+      // ]);
       return redirect('/admin-dashboard');
 
     }

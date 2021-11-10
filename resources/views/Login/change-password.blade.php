@@ -143,7 +143,7 @@
                     @method('PUT')
                               <input type="hidden" name="email" value="{{ $email }} "/>
                               <div class="input-group mb-3">
-                                <input type="password" name="password" class="form-control {{$errors->first('password') ? 'is-invalid' : ''}} border1" value="{{ old('password') }}" placeholder="New Password">
+                                <input type="password" name="password" class="form-control {{$errors->first('password') ? 'is-invalid' : ''}} border1" value="{{ old('password') }}" id="myInput" placeholder="New Password">
                                     {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
                                   <div class="input-group-append">
                                       <div class="input-group-text" style="border-top-right-radius: 25px;border-bottom-right-radius:25px">
@@ -151,6 +151,9 @@
                                       </div>
                                   </div>
                               </div>
+                              <input type="checkbox" onclick="myFunction()"> Show Password
+                              <br>
+                              <br>
                               <div class="input-group mb-3">
                                 <input type="password" name="confirm_password" class="form-control {{$errors->first('confirm_password') ? 'is-invalid' : ''}} border1" value="{{ old('confirm_password') }}" placeholder="Confirm Password">
                                 {!! $errors->first('confirm_password', '<div class="invalid-feedback">:message</div>') !!}
@@ -159,7 +162,9 @@
                                           <span class="fas fa-lock"></span>
                                       </div>
                                   </div>
+
                               </div>
+
                               <button type="submit" class="btn btn-lg btn-primary btn-block" style="border-radius:25px"> Reset Password </button>
                               <br>
                               <div style="float:right">
@@ -182,4 +187,14 @@
 <!-- Bootstrap JavaScript Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script>
+  function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>
 </html>

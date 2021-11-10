@@ -168,7 +168,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <label for="fname">Password</label>
                       </div>
                       <div class="col-75">
-                          <input type="text" class="form-control" name="password" maxlength="19" value="{{ $user->password }}" required>
+                          <input type="password" class="form-control" name="password" maxlength="19" value="{{ $user->password }}" required>
+
                       </div>
                     </div>
                     <div class="row">
@@ -219,7 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
+    
     <!-- jQuery -->
     @include('Template.script')
 </body>

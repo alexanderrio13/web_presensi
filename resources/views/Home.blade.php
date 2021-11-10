@@ -210,7 +210,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                           <label f  or="fname">Password : </label>
                                         </div>
                                         <div class="col-75 bio">
-                                              <input type="text" class="form-control" name="password" value="{{$user->password}}" required>
+                                              <input type="password" class="form-control" name="password" value="{{$user->password}}" required>
+                                              <!-- <input type="checkbox" onclick="myFunction()"> Show Password -->
                                         </div>
                                       </div>
                                       <div class="row">
@@ -502,6 +503,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         function adjustHeight(el){
             el.style.height = (el.scrollHeight > el.clientHeight) ? (el.scrollHeight)+"px" : "60px";
         }
+        
     </script>
     <!-- jQuery -->
     @include('Template.script')
