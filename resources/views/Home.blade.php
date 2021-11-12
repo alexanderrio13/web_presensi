@@ -195,8 +195,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="card-text" style="width:75%;">
                                       <form action="/home/update" method="post">
                                         {{ csrf_field() }}
-
-                                        <input type="hidden" name="id" value="{{ $user->id}}">
+                                      <div class="row">
+                                        <div class="col-25">
+                                          <label f  or="fname">NIK : </label>
+                                        </div>
+                                        <div class="col-75 bio">
+                                              <input type="text"  class="form-control" name="id" value="{{ $user->id}}" disabled>
+                                        </div>
+                                      </div>
                                       <div class="row">
                                         <div class="col-25">
                                           <label f  or="fname">Email : </label>
@@ -503,7 +509,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         function adjustHeight(el){
             el.style.height = (el.scrollHeight > el.clientHeight) ? (el.scrollHeight)+"px" : "60px";
         }
-        
+
     </script>
     <!-- jQuery -->
     @include('Template.script')
