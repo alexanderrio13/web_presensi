@@ -153,10 +153,18 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('rekap-kerja')}}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kerja Karyawan</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 @endif
                 <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link">
+                    <a href="{{ route('logout') }}" class="nav-link" onclick="return confirm('Are you sure to leave this dashboard user ?')">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
                             Logout

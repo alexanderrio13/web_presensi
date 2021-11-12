@@ -176,4 +176,38 @@ class HomeController extends Controller
 
     }
 
+    public function rekapkerja()
+    {
+        $users = User::where('level','=','karyawan')->get();
+        return view('reports.Halaman-rekap-kerja',compact('users'));
+
+    }
+
+    public function rekapkerjaResult(Request $req)
+    {
+        $user_id = Auth::user()->id;
+        $reports = Report::with('user')->whereBetween('created_at',[$req->get('tglawal'), $req->get('tglakhir')])->where('user_id',$req->get('user_id'))->orderBy('created_at','asc','user_id')->get();
+        // get hidden user id
+        // $userId = $req->input('user_id');
+        $users = User::where('level','=','karyawan')->get();
+        return view('reports.Rekap-kerja-result',compact('reports','users','user_id'));
+    }
+
+
+    public function rekapkerjaAll()
+    {
+        return view('reports.Halaman-rekap-kerja-all');
+
+    }
+
+    public function rekapkerjaResultAll(Request $req)
+    {
+        $user_id = Auth::user()->id;
+        $reports = Report::with('user')->whereBetween('created_at',[$req->get('tglawal'), $req->get('tglakhir')])->orderBy('created_at','asc')->get();
+        // get hidden user id
+        // $userId = $req->input('user_id');
+        $users = User::where('level','=','karyawan')->get();
+        return view('reports.Rekap-kerja-result-all',compact('reports','users','user_id'));
+    }
+
 }

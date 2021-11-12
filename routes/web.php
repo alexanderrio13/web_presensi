@@ -55,6 +55,10 @@ Route::get('filter-data',[PresensiController::class,'halamanrekap'])->name('filt
 Route::post('filter-data/result',[PresensiController::class,'rekapresult'])->name('filter-result');
 Route::get('filter-data/all',[PresensiController::class,'halamanrekapAll'])->name('filter-data-all');
 Route::post('filter-data/all/result',[PresensiController::class,'rekapresultAll'])->name('filter-result-all');
+Route::get('rekap-kerja',[HomeController::class,'rekapkerja'])->name('rekap-kerja');
+Route::post('rekap-kerja/result',[HomeController::class,'rekapkerjaResult'])->name('rekap-kerja-result');
+Route::get('rekap-kerja/all',[HomeController::class,'rekapkerjaAll'])->name('rekap-kerja-all');
+Route::post('rekap-kerja/all/result',[HomeController::class,'rekapkerjaResultAll'])->name('rekap-kerja-result-all');
 // Route::get('filter-data/{tglawal}/{tglakhir}/{user_id}',[PresensiController::class,'rekapresult'])->name('filter-result');
 Route::get('history',[PresensiController::class,'history'])->name('history');
 Route::get('rekap-lembur',[PresensiController::class,'rekaplembur'])->name('rekap-lembur');
