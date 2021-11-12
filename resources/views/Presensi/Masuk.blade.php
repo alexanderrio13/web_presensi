@@ -9,9 +9,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('Template.head')
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-        #results { padding:10px; border:1px solid; border-width:0px; border-radius: 5px;background:#ccc; }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
@@ -40,12 +37,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             position: relative;
             }
 
-        .part1 {
-            position: absolute;
-            left: 10px;
-            top: 140px;
-
+        #results {
+          position: absolute;
+          /* left: 2%; */
+          top: 23%;
+          padding:3px;
+          border:1px solid;
+          border-width:0px;
+          border-radius: 5px;
+          background:white;
         }
+
         .hidden-div {
         visibility:hidden;
         }
@@ -62,12 +64,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       @media screen and (max-width: 1024px) {
 
-      .part1 {
+        #results {
           position: absolute;
-          left: 60px;
+          padding:10px;
+          left: 55px;
           top: 200px;
-
-      }
+        }
 
       }
 
@@ -147,7 +149,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <input type="hidden" name="image_in" class="image-tag">
                                   </div>
                                   <div id="hide" class="hidden-div justify-content-center">
-                                    <div id="results" class="part1"></div>
+                                    <div id="results"></div>
                                     <div id="left">
                                       <button type="submit" class="btn btn-info"><i class="fas fa-check"></i> Submit</button>
                                     </div>
@@ -211,6 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Webcam.set({
                 width: 240,
                 height: 340,
+                flip_horiz: true,
                 image_format: 'jpeg',
                 jpeg_quality: 90
             });
@@ -219,6 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Webcam.set({
                 width: 440,
                 height: 340,
+                flip_horiz: true,
                 image_format: 'jpeg',
                 jpeg_quality: 90
             });
